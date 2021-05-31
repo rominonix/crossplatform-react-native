@@ -1,23 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import  SplashScreen  from './components/SplashScreen'
-import  TheRestOfTheApp  from './components/TheRestOfTheApp'
-import {useState} from 'react'
+import SplashScreen from './components/SplashScreen'
+
+import TheRestOfTheApp from './components/TheRestOfTheApp'
+import { useState } from 'react'
 
 export default function App() {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   return (
-    <React.Fragment>
+
+
+    <View style={{flex: 1, backgroundColor: 'lightblue'}}>
       {
         loading
-        ?
+          ?
           <SplashScreen />
-        :
-          <TheRestOfTheApp />
+          
+          :
+          <TheRestOfTheApp/>
       }
-    </React.Fragment>
+    </View>
+
+    
   );
 }
 

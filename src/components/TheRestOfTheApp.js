@@ -1,13 +1,20 @@
+import {NavigationContainer} from '@react-navigation/native'
+import MainStack from '../navigators/MainStack'
+
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function TheRestOfApp() {
   return (
-    <View style={styles.container}>
-      <Text>Romina!</Text>
-      <StatusBar style="auto" />
-    </View>
+
+    <NavigationContainer>
+      <MainStack />
+    </NavigationContainer>
+    // <View style={styles.container}>
+    //   <Text>Romina!</Text>
+    //   <StatusBar style="auto" />
+    // </View>
   );
 }
 
