@@ -12,5 +12,6 @@ const HomeScreen = props => {
          <Button onPress={pressHandler} title="Go to profile"></Button>
       </SafeAreaView>
    )
+
 }
 export default HomeScreen
