@@ -11,10 +11,7 @@ export default function TheRestOfApp() {
     <NavigationContainer>
       <MainStack />
     </NavigationContainer>
-    // <View style={styles.container}>
-    //   <Text>Romina!</Text>
-    //   <StatusBar style="auto" />
-    // </View>
+
   );
 }
 

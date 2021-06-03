@@ -1,17 +1,16 @@
 import React from 'react'
-import { SafeAreaView, Text, Button } from 'react-native'
+import Login from '../components/Login'
+import { LoginContextProvider } from '../store/LoginContext'
+import {SafeAreaView} from 'react-native'
 
 const HomeScreen = props => {
-
-   const pressHandler = () => {
-      props.navigation.navigate('UserProfile')
-      }
    return (
-      <SafeAreaView style={{ flex: 1}}>
-         <Text>Home Screen!</Text>
-         <Button onPress={pressHandler} title="Go to profile"></Button>
+      <SafeAreaView style={{ flex: 1 }}>
+         < LoginContextProvider>
+            <Login />
+         </ LoginContextProvider>
       </SafeAreaView>
    )
-
 }
 export default HomeScreen
+
