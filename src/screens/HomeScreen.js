@@ -7,7 +7,7 @@ const HomeScreen = props => {
    return (
       <SafeAreaView style={{ flex: 1 }}>
          < LoginContextProvider>
-            <Login />
+            <Login navigation={props.navigation} />
          </ LoginContextProvider>
       </SafeAreaView>
    )

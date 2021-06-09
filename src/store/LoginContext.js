@@ -5,18 +5,17 @@ const LoginContext = React.createContext()
 
 const LoginContextProvider = (props) => {
     const [email, setEmail] = useState('')
+    const [token, setToken] = useState('')
     const [password, setPassword] = useState('')
 
 
     const login = async () => {
-        const userLogin = await API.authenticate()
-
-
-        setEmail(email, userLogin)
-        setPassword(password, userLogin)
+        const userLogin = await API.authenticate(email, password)
+        setEmail(userLogin.email)
+        setToken(userLogin.token)
     }
     return (
-        <LoginContext.Provider value={{ username, setEmail, setPassword, password, login }}>
+        <LoginContext.Provider value={{email, setEmail, setToken, token, password, setPassword, login}}>
             {props.children}
         </LoginContext.Provider>
     )
