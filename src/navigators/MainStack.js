@@ -8,22 +8,22 @@ const Stack = createStackNavigator()
 const MainStack = (props) => {
     return (
 
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
             <Stack.Screen
                 name="Home"
                 component={HomeScreen}
-                options={{ title: 'Welcome' }}
-            />
-
-            <Stack.Screen
-                name='UserProfile'
-                component={UserProfile}
             />
 
             <Stack.Screen
                 name='TasksScreen'
                 component={TasksScreen}
             />
+            
+            <Stack.Screen
+                name='UserProfile'
+                component={UserProfile}
+            />
+
         </Stack.Navigator>
     )
 }
