@@ -1,17 +1,17 @@
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { ImageBackground, StyleSheet, Text, View, Image} from 'react-native'
 import SplashScreen from './components/SplashScreen'
 import TheRestOfTheApp from './components/TheRestOfTheApp'
 import { useState } from 'react'
 
 export default function App() {
   const [loading, setLoading] = useState(false)
-
+  
   return (
 
 
-    <View style={{flex: 1, backgroundColor: 'lightblue'}}>
+    <View>
       {
         loading
           ?
@@ -28,9 +28,13 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+      flex: 1,
+      flexDirection: "column"
+    },
+    image: {
+      flex: 1,
+      resizeMode: "cover",
+      justifyContent: "center"
+    }
+  
 });
