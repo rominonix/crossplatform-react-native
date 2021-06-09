@@ -10,31 +10,26 @@ export default function App() {
   
   return (
 
+    <View style={{flex: 1, backgroundColor: 'lightblue'}}>
+    {
+      loading
+        ?
+        <SplashScreen />
+        
+        :
+        <TheRestOfTheApp/>
+    }
+  </View>
 
-    <View>
-      {
-        loading
-          ?
-          <SplashScreen />
-          
-          :
-          <TheRestOfTheApp/>
-      }
-    </View>
-
-    
-  );
+  
+);
 }
 
 const styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      flexDirection: "column"
-    },
-    image: {
-      flex: 1,
-      resizeMode: "cover",
-      justifyContent: "center"
-    }
-  
+container: {
+  flex: 1,
+  backgroundColor: '#fff',
+  alignItems: 'center',
+  justifyContent: 'center',
+},
 });
