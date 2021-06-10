@@ -4,19 +4,19 @@ import * as API from '@/api'
 const TasksContext = React.createContext()
 
 const TasksContextProvider = (props) => {
- const [username, setUserName] = useState('')
+ const [tasktitle, setTaskTitle] = useState('')
 
- const [tasks, setTasks] = useState([])
+//  const [tasks, setTasks] = useState([])
 
  const getLatestTasks = async () => {
  const latestTasks = await API.fetchLatestTasks()
  
  setTasks([...tasks,...latestTasks])
- setUserName(username)
+//  setUserName(username)
  
  }
     return (
-        <TasksContext.Provider value={{username, getLatestTasks}}>
+        <TasksContext.Provider value={{tasktitle, setTaskTitle, getLatestTasks}}>
             {props.children}
         </TasksContext.Provider>
     )
