@@ -12,7 +12,7 @@ const Login = props => {
    const loginContext = useContext(LoginContext)
    const loginHandler = async () => {
       const success = await loginContext.login()
-      props.navigation.navigate('UserProfile')
+      props.navigation.navigate('Details')
    }
 
    const bgrImage = require('../assets/background-login1.png')

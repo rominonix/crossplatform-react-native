@@ -1,13 +1,13 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from '../screens/HomeScreen'
-import UserProfile from '../screens/UserProfile'
+import Details from '../screens/Details'
 
 const Stack = createStackNavigator()
 const MainStack = (props) => {
     return (
 
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Home"  >
             <Stack.Screen
                 name="Home"
                 component={HomeScreen}
@@ -16,8 +16,9 @@ const MainStack = (props) => {
             />
 
             <Stack.Screen
-                name='UserProfile'
-                component={UserProfile}
+                name='Details'
+                component={Details}
+                options={{headerShown: false}}
             />
         </Stack.Navigator>
     )
