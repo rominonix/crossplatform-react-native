@@ -10,7 +10,7 @@ const LoginContextProvider = (props) => {
 
 
     const login = async () => {
-        const userLogin = await API.authenticate(email, password)
+        const userLogin = await API.authenticate('worker2@email.com', 'bananpaj2')
         setEmail(userLogin.email)
         setToken(userLogin.token)
     }

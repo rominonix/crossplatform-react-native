@@ -1,34 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { SafeAreaView, Text, Button, View, StyleSheet, TextInput, ImageBackground } from 'react-native'
+import { SafeAreaView, Text, Button, View, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native'
 import { TasksContext } from '../store/TasksContext'
 import BackgroundImg from '../assets/inside-background.png'
 const Tasks = props => {
     const taskContext = useContext(TasksContext)
-    // const loginHandler = async () => { 
-    //    const success = await loginContext.login()
-    //    props.navigation.navigate('TasksScreen')}
+    const taskHandler = async () => { 
+       const success = await taskContext.login()
+       props.navigation.navigate('UserProfile')}
 
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
+                <TextInput style={styles.input}>
 
+                </TextInput>
 
-                {/* <View style={styles.content}> */}
-                {/* <Text style={styles.emailLabel}>Email</Text>
-                   <TextInput underlineColorAndroid='transparent' style={styles.input} autoCapitalize='none' placeholder="Your username"
-                      onChangeText={loginContext.setEmail}
-                      value={loginContext.email}
-                   >
-                   </TextInput>
-                   <Text style={styles.passwordLabel}>Password</Text>
-                   <TextInput secureTextEntry={true} underlineColorAndroid='transparent' style={styles.input} placeholder="Password"
-                      onChangeText={loginContext.setPassword}
-                      value={loginContext.password}
-                   >
-                   </TextInput>
-                   <Button title="Sign in" style={styles.buttonContainer} onPress={loginHandler}></Button> */}
-                {/* </View> */}
+                <TouchableOpacity 
+                style={styles.taskButton} onPress={taskHandler}>
+                    <Text style={styles.buttonTitle}>
+                        Task title
+                    </Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
@@ -37,7 +30,7 @@ const Tasks = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'whitesmoke',
         width: 'auto',
@@ -53,7 +46,32 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.6,
     },
+    input:{
+        borderWidth:0.5,
+        width:'65%',
+        height:30,
+        marginTop:40,
+        borderRadius:5,
+        borderColor:'#545454',
+    },
 
+    taskButton:{
+        justifyContent:'center',
+        alignItems:'center',
+        borderWidth:1,
+        borderColor: '#545454',
+        width:'80%',
+        height:50,
+        borderStyle:'dashed',
+        margin:30,
+        // strokeDasharray:"8, 3",
+        borderRadius: 10,
+    }, 
+
+    buttonTitle:{
+        color:'#545454',
+        textTransform:'uppercase'
+    }
 
     //    emailLabel: {
     //       color: 'blue',
