@@ -1,25 +1,39 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import * as API from '@/api'
 
 const TasksContext = React.createContext()
 
 const TasksContextProvider = (props) => {
- const [tasktitle, setTaskTitle] = useState('')
+    const [tasks, setTasks] = useState([])
+    const [taskName, setTaskName] = useState('')
+    const [clientId, setClientId] = useState('')
 
-//  const [tasks, setTasks] = useState([])
+    const getLatestTasks = async () => {
+        const latestTasks = await API.gettasks(tasks)
+        setTasks([...latestTasks.workerTask])
+    }
 
- const getLatestTasks = async () => {
- const latestTasks = await API.fetchLatestTasks()
- 
- setTasks([...tasks,...latestTasks])
-//  setUserName(username)
- 
- }
+    const createNewTask = async () => {
+        console.log("holi bolis");
+        const newTask = await API.newtask(taskName, clientId)
+        setTaskName(newTask.taskName)
+        setClientId(newTask.clientId)
+    }
     return (
-        <TasksContext.Provider value={{tasktitle, setTaskTitle, getLatestTasks}}>
+        <TasksContext.Provider
+            value={{
+                tasks,
+                setTasks,
+                taskName,
+                setTaskName,
+                clientId,
+                setClientId,
+                getLatestTasks,
+                createNewTask
+            }}>
             {props.children}
         </TasksContext.Provider>
     )
 }
 
- export { TasksContextProvider, TasksContext }
+export { TasksContextProvider, TasksContext }

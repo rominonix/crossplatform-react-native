@@ -17,15 +17,6 @@ const TasksScreen = props => {
                 </ TasksContextProvider>
             </ImageBackground>
         </SafeAreaView>
-
-        // <SafeAreaView style={{ flex: 1 }}>
-
-        //         <Text>
-        //             holi
-        //         </Text>
-        //         <BackgroundImg width={120} height={40}/>
-
-        // </SafeAreaView>
     )
 }
 

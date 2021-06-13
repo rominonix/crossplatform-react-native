@@ -1,55 +1,55 @@
-import React, { useContext } from 'react'
-import { SafeAreaView, View, StyleSheet, TextInput, FlatList, Text, TouchableOpacity } from 'react-native'
+import React, { useContext, useEffect } from 'react'
+import { SafeAreaView, View, StyleSheet, TextInput, FlatList, Text, TouchableOpacity, Button } from 'react-native'
 import { TasksContext } from '../store/TasksContext'
-// import BackgroundImg from '../assets/inside-background.png'
+import { useNavigation } from '@react-navigation/native';
+
+
 const Tasks = props => {
-    const taskContext = useContext(TasksContext)
-    const taskHandler = async () => {
-        const success = await taskContext.login()
-        props.navigation.navigate('UserProfile')
-    }
-    const data = [
-        { id: '1', title: 'Grillkorv', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci qui laboriosam nihil repudiandae quod temporibus!' },
-        { id: '2', title: 'Bananpaj', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci qui laboriosam nihil repudiandae quod temporibus!' },
-        { id: '3', title: 'Sötsursås', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci qui laboriosam nihil repudiandae quod temporibus!' },
-        { id: '4', title: 'Grillbanan', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci qui laboriosam nihil repudiandae quod temporibus!' },
-        { id: '5', title: 'Korvpaj', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci qui laboriosam nihil repudiandae quod temporibus!' },
-        { id: '6', title: 'Banan med bröd', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci qui laboriosam nihil repudiandae quod temporibus!' },
-    ]
 
+    const tasksContext = useContext(TasksContext)
+    let mytasks = tasksContext.tasks
+    useEffect(() => {
+        tasksContext.getLatestTasks()
+    }, [])
 
-    const Item = ({item, onPress}) => {
+    const Item = ({ item }) => {
         return (
-          <View>
-            <TouchableOpacity style={styles.item} onPress={onPress}>
-              <Text style={styles.itemText}>{item.title}</Text>
-            </TouchableOpacity>
-          </View>
+            <View>
+                <TouchableOpacity style={styles.item}>
+                    <Text style={styles.itemText}>{item.taskName}</Text>
+                </TouchableOpacity>
+            </View>
         )
-      }
+    }
+
+    const ButtonCreateTask = () => {
+        const navigation = useNavigation()
+        return (
+            <TouchableOpacity
+                style={styles.createTask}
+                onPress={() =>
+                    navigation.navigate('CreateTask')}>
+                <Text
+                    style={styles.createTaskTitle}>
+                    Create task
+                </Text>
+            </TouchableOpacity>
 
 
+        )
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
+                <ButtonCreateTask />
                 <TextInput style={styles.input}>
-
                 </TextInput>
-
-                <FlatList   style={styles.list}
-        data={data}
-        keyExtractor={item => item.id}
-        renderItem={ (props) => <Item item={props.item} onPress={() => setCurrentID(props.item.id)} />}/>
-
-              
-
-                {/* <TouchableOpacity 
-                style={styles.taskButton} onPress={taskHandler}>
-                    <Text style={styles.buttonTitle}>
-                        Task title
-                    </Text>
-                </TouchableOpacity> */}
+                <FlatList style={styles.list}
+                    data={mytasks}
+                    keyExtractor={item => item.id}
+                    renderItem={(props) => <Item item={props.item}
+                        onPress={() => setCurrentID(props.item.id)} />} />
             </View>
         </SafeAreaView>
     )
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'whitesmoke',
         width: 'auto',
-        marginTop: 80,
+        marginTop: 100,
         marginLeft: 20,
         marginRight: 20,
         marginBottom: 80,
@@ -82,21 +82,19 @@ const styles = StyleSheet.create({
         borderColor: '#545454',
     },
 
-    taskButton: {
+    createTask: {
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
-        borderColor: '#545454',
-        width: '80%',
+        width: '50%',
         height: 50,
-        borderStyle: 'dashed',
         margin: 30,
-        // strokeDasharray:"8, 3",
+        backgroundColor: '#545454',
         borderRadius: 10,
     },
 
-    buttonTitle: {
-        color: '#545454',
+    createTaskTitle: {
+        color: 'whitesmoke',
         textTransform: 'uppercase'
     },
 
@@ -106,23 +104,20 @@ const styles = StyleSheet.create({
     },
     item: {
         marginTop: 30,
-        marginLeft:20,
-        marginRight:20,
+        marginLeft: 20,
+        marginRight: 20,
         padding: 15,
-        borderRadius:10,
+        borderRadius: 10,
         borderWidth: 1,
         borderStyle: 'dashed',
         borderColor: '#545454',
         alignItems: 'center',
-        // justifyContent: 'center',
-        // borderBottomWidth: 1,
-        // backgroundColor: 'rebeccapurple'
-      },
-      itemText: {
+    },
+    itemText: {
         color: '#545454',
         fontSize: 18
-      },
-      activeItem: {
+    },
+    activeItem: {
         backgroundColor: 'brown',
         position: 'absolute',
         top: 0,
@@ -131,26 +126,8 @@ const styles = StyleSheet.create({
         right: 0,
         zIndex: 1,
         padding: 30,
-        paddingTop: 60    
-      },
-    //    emailLabel: {
-    //       color: 'blue',
-    //    },
-    //    input: {
-    //       borderRadius: 10,
-    //       padding: 10,
-    //       color: 'black',
-    //       borderWidth: 2,
-    //       borderColor: 'lightgray',
-    //       width: 200,
-    //       margin: 5,
-    //    },
-    //    buttonContainer: {
-    //       margin: 10,
-    //       padding: 10,
-    //       justifyContent: 'center',
-    //       alignItems: 'center',
-    //    }
+        paddingTop: 60
+    },
 })
 
 export default Tasks

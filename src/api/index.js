@@ -11,15 +11,25 @@ export async function authenticate(email, password) {
       return response.data
    }
    else {
-      console.error({ msg: "invalid credentials" })
+      console.error({ msg: "Invalid credentials" })
+   }
+}
+
+export async function gettasks(tasks) {
+   const response = await API.get('/tasks/worker', tasks)
+   if (response.status == 200) { 
+      return response.data }
+   else {
+      console.error({ msg: "error with tasks" })
    }
 }
 
 
-// export async function fetchLatestTasks(){
-//  const response = await API.get('/tasks')
-//  if(response.code == 200){ return response.data }
-//  else{
-//     response.error({msg: "error with tasks"})
-//  }
-// }
+export async function newtask(taskName, clientId) {
+   const response = await API.post('/tasks', {taskName, clientId})
+   if (response.status == 200) { 
+      return response.data }
+   else {
+      console.error({ msg: "error with tasks" })
+   }
+}

@@ -2,36 +2,42 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from '../screens/HomeScreen'
 import Details from '../screens/Details'
-import UserProfile from '../screens/UserProfile'
+import ProfileScreen from '../screens/ProfileScreen'
 import TasksScreen from '../screens/TasksScreen'
+import CreateTask from '../screens/CreateTask'
 
 const Stack = createStackNavigator()
 const MainStack = (props) => {
     return (
 
-        <Stack.Navigator initialRouteName="Home"  >
+        <Stack.Navigator initialRouteName="Home" >
             <Stack.Screen
                 name="Home"
                 component={HomeScreen}
-                
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
 
             <Stack.Screen
                 name='Details'
                 component={Details}
-                options={{headerShown: false}} />
-       
-           
+                options={{ headerShown: false }} />
 
             <Stack.Screen
                 name='TasksScreen'
                 component={TasksScreen}
+                options={{ headerShown: false }}
             />
-            
+
             <Stack.Screen
-                name='UserProfile'
-                component={UserProfile}
+                name='CreateTask'
+                component={CreateTask}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name='ProfileScreen'
+                component={ProfileScreen}
+                options={{ headerShown: false }}
             />
 
         </Stack.Navigator>

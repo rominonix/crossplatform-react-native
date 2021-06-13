@@ -1,18 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { SafeAreaView, Text, Button, View, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native'
-
+import React, { useContext } from 'react'
+import { Text, View, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native'
 import { LoginContext } from '../store/LoginContext'
-
-
-
-
-
 
 const Login = props => {
    const loginContext = useContext(LoginContext)
    const loginHandler = async () => {
       const success = await loginContext.login()
-      props.navigation.navigate('Details')
+      props.navigation.navigate('TasksScreen')
    }
 
    const bgrImage = require('../assets/background-login1.png')
@@ -39,7 +33,7 @@ const Login = props => {
                   <Text style={{ color: '#F5F5F5', margin: 5 }}>SIGN IN</Text>
                </TouchableOpacity>
             </View>
-            <Text style={styles.title}>INGG BRA BYGG</Text>
+            <Text style={styles.title}>INGE BRA BYGG</Text>
          </View>
       </ImageBackground>
 
@@ -73,8 +67,6 @@ const styles = StyleSheet.create({
       elevation: 9,
       marginTop: 180,
       marginBottom: 180,
-      // marginLeft: 80,
-      // marginRight: 80,
       alignItems: 'center',
       backgroundColor: '#CFDEEC',
       justifyContent: 'center',
@@ -117,22 +109,9 @@ const styles = StyleSheet.create({
       backgroundColor: '#5A5454'
    },
    title: {
-      //zIndex:'auto',
-      // alignItems:'flex-end',
-      //   elevation: 3,
-      //    alignItems:'flex-end',
-      //position:'absolute',
-
       fontSize: 30,
-
       marginTop: 400,
       color: '#5A5454'
-
-      //    justifyContent:'center',
-
-
-      //    marginTop: -30,
-      //    marginLeft: -10,
    }
 })
 
