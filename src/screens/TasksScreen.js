@@ -1,8 +1,8 @@
 import React from 'react'
-// import Login from '../components/Login'
 import { TasksContextProvider } from '../store/TasksContext'
 import Tasks from '../components/Tasks'
 import { ImageBackground, SafeAreaView, Text, StyleSheet } from 'react-native'
+
 // import image from '../assets/inside-background.png'
 // import BackgroundImg from '../assets/inside-background.svg'
 
