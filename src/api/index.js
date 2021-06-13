@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'http://192.168.0.14:3000'; 
+axios.defaults.baseURL = 'http://192.168.1.154:3000'; 
 
 const API = axios.create()
 
