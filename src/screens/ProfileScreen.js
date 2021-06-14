@@ -9,12 +9,12 @@ import { ActionSheet, Root } from 'native-base'
 const ProfileScreen = props => {
    const [image, setImage] = React.useState({ picture })
 
-   React.useEffect(() => {
-      ImagePicker.requestMediaLibraryPermissionsAsync()
-         .then(response => {
-            console.log(response);
-         })
-   }, [])
+   // React.useEffect(() => {
+   //    ImagePicker.requestMediaLibraryPermissionsAsync()
+   //       .then(response => {
+   //          console.log(response);
+   //       })
+   // }, [])
 
    const chooseImageFromLibrary = async () => {
       const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
