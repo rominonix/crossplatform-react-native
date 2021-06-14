@@ -33,3 +33,26 @@ export async function newtask(taskName, clientId) {
       console.error({ msg: "error with tasks" })
    }
 }
+
+export async function updatetask(taskName, clientId) {
+   const response = await API.patch('/tasks/:id', {taskName, clientId})
+   if (response.status == 200) { 
+      return response.data }
+   else {
+      console.error({ msg: "cannot update task" })
+   }
+}
+
+export async function deletetask(currentID) {
+   console.log(currentID);
+   
+   
+  
+
+   const response = await API.delete('/tasks/',{params: currentID})
+   if (response.status == 200) { 
+      return response.data }
+   else {
+      console.error({ msg: "cannot delete task" })
+   }
+}

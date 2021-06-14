@@ -7,6 +7,10 @@ const TasksContextProvider = (props) => {
     const [tasks, setTasks] = useState([])
     const [taskName, setTaskName] = useState('')
     const [clientId, setClientId] = useState('')
+    // const [taskId, setTaskId] = useState('')
+    const [currentID, setCurrentID] = useState(null)
+   
+  
 
     const getLatestTasks = async () => {
         const latestTasks = await API.gettasks(tasks)
@@ -14,11 +18,23 @@ const TasksContextProvider = (props) => {
     }
 
     const createNewTask = async () => {
-        console.log("holi bolis");
         const newTask = await API.newtask(taskName, clientId)
         setTaskName(newTask.taskName)
         setClientId(newTask.clientId)
     }
+
+    const updateTask = async () => {
+        const updTask = await API.updatetask(taskName, clientId)
+        setTaskName(updTask.taskName)
+        setClientId(updTask.clientId)
+    }
+
+    const deleteTask = async () => {
+        console.log(currentID);
+        const dltTask = await API.deletetask(currentID)
+        setCurrentID(dltTask.currentID)
+    }
+
     return (
         <TasksContext.Provider
             value={{
@@ -28,8 +44,14 @@ const TasksContextProvider = (props) => {
                 setTaskName,
                 clientId,
                 setClientId,
+                // taskId,
+                // setTaskId,
+                currentID,
+                setCurrentID,
                 getLatestTasks,
-                createNewTask
+                createNewTask,
+                updateTask,
+                deleteTask,
             }}>
             {props.children}
         </TasksContext.Provider>

@@ -15,7 +15,15 @@ const LoginContextProvider = (props) => {
         setToken(userLogin.token)
     }
     return (
-        <LoginContext.Provider value={{email, setEmail, setToken, token, password, setPassword, login}}>
+        <LoginContext.Provider 
+        value={{
+            email, 
+            setEmail, 
+            setToken, 
+            token, 
+            password, 
+            setPassword, 
+            login}}>
             {props.children}
         </LoginContext.Provider>
     )
