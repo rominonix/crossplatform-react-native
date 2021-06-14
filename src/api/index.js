@@ -15,6 +15,19 @@ export async function authenticate(email, password) {
 }
 
 
+
+export async function getMe(email, name) {
+  
+   const response = await API.get('/me',{ email, name })
+
+   if (response.status == 200) {API.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`
+   return response.data}
+   else {
+      console.error({ msg: "there is no this user" })
+   }
+}
+
+
 // export async function fetchLatestTasks(){
 //  const response = await API.get('/tasks')
 //  if(response.code == 200){ return response.data }
