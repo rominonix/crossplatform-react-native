@@ -2,13 +2,17 @@ import React, { useContext, useEffect, useState } from 'react'
 import { SafeAreaView, View, StyleSheet, TextInput, FlatList, Text, TouchableOpacity, Animated } from 'react-native'
 import { TasksContext } from '../store/TasksContext'
 import { useNavigation } from '@react-navigation/native';
-import { Icon } from 'react-native-elements';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+// import Swipeable from './Swipeable';
+
 
 const Tasks = props => {
 
     const tasksContext = useContext(TasksContext)
+    // const loginContext = useContext(LoginContext)
     let mytasks = tasksContext.tasks
-    let setCurrentID = tasksContext.setCurrentID 
+    let setCurrentID = tasksContext.setCurrentID
 
     useEffect(() => {
         tasksContext.getLatestTasks()
@@ -24,7 +28,7 @@ const Tasks = props => {
         const navigation = useNavigation()
         return (
             <TouchableOpacity
-                style={styles.createTask}
+                style={styles.createTaskButton}
                 onPress={() =>
                     navigation.navigate('CreateTask')}>
                 <Text
@@ -42,7 +46,7 @@ const Tasks = props => {
                 style={styles.updateTaskButton}
                 onPress={() =>
                     navigation.navigate('UpdateTaskScreen')}
-                >
+            >
                 <Text
                     style={styles.createTaskTitle}>
                     Update task
@@ -53,11 +57,11 @@ const Tasks = props => {
 
     const Item = ({ item, onPress }) => {
         return (
-            <View>
-                <TouchableOpacity style={styles.item} onPress={onPress}>
-                    <Text style={styles.itemText}>{item.taskName}</Text>
-                </TouchableOpacity>
-            </View>
+                <View>
+                    <TouchableOpacity style={styles.item} onPress={onPress}>
+                        <Text style={styles.itemText}>{item.taskName}</Text>
+                    </TouchableOpacity>
+                </View>
         )
     }
 
@@ -85,10 +89,13 @@ const Tasks = props => {
         return (
             <Animated.View style={[styles.activeItem, { transform: [{ scale }] }]}>
                 <TouchableOpacity style={styles.closeButton} onPress={hideItem}>
-                    <Text style={styles.closeButtonText}>X</Text>
+                    <MaterialCommunityIcons name='window-close' size={30} color={'#545454'}/>
                 </TouchableOpacity>
-                <Text style={styles.itemText}>{item.taskName}</Text>
-                <Text style={styles.activeItemHeading} >{item.id}</Text>
+                <View style={styles.contentActiveItem}>
+
+                <Text style={styles.itemText}>Task Id: {item.id}</Text>
+                <Text style={styles.itemText}>Task name: {item.taskName}</Text>
+                </View>
 
                 <ButtonUpdateTask />
 
@@ -101,6 +108,8 @@ const Tasks = props => {
     }
 
     return (
+
+
         <SafeAreaView style={{ flex: 1 }}>
 
             {
@@ -108,12 +117,19 @@ const Tasks = props => {
             }
 
             <View style={styles.container}>
-                <ButtonCreateTask />
-                <Icon
-                name='search'
-                type='font-awesome'
-                color='#545454'
-                />
+            <ButtonCreateTask />
+                {/* <Text>
+                    Hello: {loginContext.name}
+                </Text> */}
+
+                {/* <Swipeable
+                swipeRight={action}>
+                    <View style={[styles.box, {backgroundColor: colorFlag ? 'blue' : 'tomato'}]}/>
+
+                  
+                </Swipeable> */}
+
+                <MaterialCommunityIcons name='magnify' size={30} color={'#545454'} />
                 <TextInput style={styles.input}>
                 </TextInput>
                 <FlatList style={styles.list}
@@ -123,7 +139,7 @@ const Tasks = props => {
                         onPress={() => setCurrentID(props.item.id)} />} />
             </View>
         </SafeAreaView>
-    ) 
+    )
 }
 
 const styles = StyleSheet.create({
@@ -132,11 +148,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'whitesmoke',
         width: 'auto',
+        paddingTop:40,
         marginTop: 100,
         marginLeft: 20,
         marginRight: 20,
-        marginBottom: 60,
-        borderRadius: 30,
+        marginBottom: 30,
+        borderRadius: 20,
         shadowColor: '#545454',
         shadowOffset: {
             width: 5,
@@ -153,38 +170,40 @@ const styles = StyleSheet.create({
         borderColor: '#545454',
     },
 
-    createTask: {
+    createTaskButton: {
+        position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'flex-end',
         borderWidth: 1,
-        width: '50%',
+        width: '40%',
         height: 50,
-        margin: 30,
-        marginTop: -20,
+        top: -20,
+        right:30,
         backgroundColor: '#545454',
-        borderRadius: 10,
+        borderRadius: 8,
+        zIndex:0
     },
 
-    updateTaskButton:{
+    updateTaskButton: {
         justifyContent: 'center',
         alignItems: 'center',
-        // alignSelf: 'flex-end',
         borderWidth: 1,
         width: '50%',
         height: 50,
         margin: 30,
-        // marginTop: -20,
         backgroundColor: '#545454',
-        borderRadius: 10,
-
+        borderRadius: 8,
     },
-
 
     createTaskTitle: {
         color: 'whitesmoke',
         textTransform: 'uppercase'
     },
+
+    closeButton: {
+        alignSelf: 'flex-end',
+      },
 
     list: {
         width: '90%',
@@ -208,7 +227,7 @@ const styles = StyleSheet.create({
     activeItem: {
         backgroundColor: '#CFDEEC',
         position: 'absolute',
-        alignItems:'center',
+        alignItems: 'center',
         top: 0,
         left: 0,
         bottom: 0,
@@ -217,6 +236,24 @@ const styles = StyleSheet.create({
         padding: 30,
         paddingTop: 60
     },
+    contentActiveItem:{
+        flex: 1,
+        alignItems:'baseline',
+        backgroundColor: 'whitesmoke',
+        width: 340,
+        paddingTop:40,
+        paddingLeft:30,
+        marginTop: 20,
+        borderRadius: 20,
+        shadowColor: '#545454',
+        shadowOffset: {
+            width: 5,
+            height: 5,
+        },
+        shadowOpacity: 0.6,
+    }
+
+    
 })
 
 export default Tasks

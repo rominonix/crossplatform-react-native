@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { SafeAreaView, Text, View, StyleSheet, TextInput, Button } from 'react-native'
+import { SafeAreaView, Text, View, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native'
 import { TasksContext } from '../store/TasksContext'
 
 
@@ -26,8 +26,11 @@ const NewTask = props => {
                  onChangeText={addNewTask.setClientId}
                  value={addNewTask.clientId}>
                 </TextInput>
-                <Button title='Add task'
-                onPress={newTaskHandler}></Button>
+                <TouchableOpacity 
+                style={styles.addTaskButton}
+                onPress={newTaskHandler}>
+                    <Text style={styles.addTaskTitle}>Add task</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
 
@@ -63,6 +66,22 @@ const styles = StyleSheet.create({
     },
     label: {
         color: '#545454',
+    },
+
+    addTaskButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        width: '50%',
+        height: 50,
+        margin: 30,
+        backgroundColor: '#545454',
+        borderRadius: 8,
+    },
+
+    addTaskTitle: {
+        color: 'whitesmoke',
+        textTransform: 'uppercase'
     },
 })
 export default NewTask

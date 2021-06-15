@@ -1,5 +1,7 @@
 import React from 'react'
-import { TasksContextProvider } from '../store/TasksContext'
+// import { TasksContextProvider } from '../store/TasksContext'
+// import { LoginContextProvider } from '../store/TasksContext'
+
 import Tasks from '../components/Tasks'
 import { ImageBackground, SafeAreaView, Text, StyleSheet } from 'react-native'
 
@@ -12,9 +14,9 @@ const TasksScreen = props => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ImageBackground source={BackgroundImg} style={styles.image}>
-                {/* < TasksContextProvider> */}
+                {/* < TaskContextProvider> */}
                     <Tasks />
-                {/* </ TasksContextProvider> */}
+                {/* </ TaskContextProvider> */}
             </ImageBackground>
         </SafeAreaView>
     )

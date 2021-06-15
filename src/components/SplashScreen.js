@@ -7,7 +7,7 @@ const image = require('../assets/splash.png')
 const SplashScreen = () => (
   <View style={styles.container}>
     <ImageBackground source={image} style={styles.image}>
-      <Text style={styles.text}>Inside</Text>
+      {/* <Text style={styles.text}>Inside</Text> */}
     </ImageBackground>
   </View>
 );
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    resizeMode: "cover",
+    // resizeMode: "cover",
     justifyContent: "center"
   },
   text: {
