@@ -5,22 +5,24 @@ import SplashScreen from './components/SplashScreen'
 import TheRestOfTheApp from './components/TheRestOfTheApp'
 import { useState } from 'react'
 
+import { TasksContextProvider } from './store/TasksContext'
+
 export default function App() {
   const [loading, setLoading] = useState(false)
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'lightblue' }}>
-      {
-        loading
-          ?
-          <SplashScreen />
+    < TasksContextProvider>
+      <View style={{ flex: 1, backgroundColor: 'lightblue' }}>
+        {
+          loading
+            ?
+            <SplashScreen />
 
-          :
-          <TheRestOfTheApp />
-      }
-    </View>
-
-
+            :
+            <TheRestOfTheApp />
+        }
+      </View>
+    </ TasksContextProvider>
   );
 }
 

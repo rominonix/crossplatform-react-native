@@ -2,25 +2,23 @@ import React, { useContext, useEffect, useState } from 'react'
 import { SafeAreaView, View, StyleSheet, TextInput, FlatList, Text, TouchableOpacity, Animated } from 'react-native'
 import { TasksContext } from '../store/TasksContext'
 import { useNavigation } from '@react-navigation/native';
-
+import { Icon } from 'react-native-elements';
 
 const Tasks = props => {
 
     const tasksContext = useContext(TasksContext)
     let mytasks = tasksContext.tasks
+    let setCurrentID = tasksContext.setCurrentID 
+
     useEffect(() => {
         tasksContext.getLatestTasks()
     }, [])
 
-    // const updateTaskScreen = () =>{
-        // const updateSuccess = await tasksContext.updateTask(taskName, clientId)
-        // let setTaskName;
-        // let setClientId;    
+    // const deleteAtask = async () =>  {
+    //     const deleteSuccess = await tasksContext.deleteTask(currentID)  
     // }
 
-    const deleteAtask = async () =>  {
-        const deleteSuccess = await tasksContext.deleteTask(currentID)  
-    }
+    const currentItem = mytasks.find(item => item.id == tasksContext.currentID)
 
     const ButtonCreateTask = () => {
         const navigation = useNavigation()
@@ -41,9 +39,10 @@ const Tasks = props => {
         const navigation = useNavigation()
         return (
             <TouchableOpacity
-                style={styles.createTask}
+                style={styles.updateTaskButton}
                 onPress={() =>
-                    navigation.navigate('UpdateScreen')}>
+                    navigation.navigate('UpdateTaskScreen')}
+                >
                 <Text
                     style={styles.createTaskTitle}>
                     Update task
@@ -61,19 +60,6 @@ const Tasks = props => {
             </View>
         )
     }
-
-    // const Update = ({ updateItem, onPress }) => {
-    //     return (
-    //         <View>
-    //              <TouchableOpacity style={styles.item} onPress={onPress}>
-    //                 <Text style={styles.itemText}>{updateItem.taskName}</Text>
-    //                 <TextInput>
-
-    //                 </TextInput>
-    //             </TouchableOpacity>
-    //         </View>
-    //     )
-    // }
 
     const ActiveItem = ({ setCurrentID, item }) => {
         const scale = new Animated.Value(0)
@@ -104,8 +90,7 @@ const Tasks = props => {
                 <Text style={styles.itemText}>{item.taskName}</Text>
                 <Text style={styles.activeItemHeading} >{item.id}</Text>
 
-                <ButtonUpdateTask/>
-
+                <ButtonUpdateTask />
 
                 {/* <TouchableOpacity style={styles.item}>
                     <Text style={styles.itemText} onPress={deleteAtask}>DELETE</Text>
@@ -114,42 +99,6 @@ const Tasks = props => {
         )
 
     }
-
-
-    // const UpdateItem = ({ setCurrentID, updateItem }) => {
-    //     const updateScreen = new Animated.Value(0)
-
-    //     useEffect(() => {
-    //         Animated.timing(updateScreen, {
-    //             toValue: 1,
-    //             duration: 150,
-    //             useNativeDriver: true
-    //         }).start()
-    //     }, [])
-
-    //     const hideItem = () => {
-    //         Animated.timing(updateScreen, {
-    //             toValue: 0,
-    //             duration: 150,
-    //             useNativeDriver: true
-    //         }).start(() => {
-    //             setCurrentID(null)
-    //         })
-    //     }
-
-    //      return (
-    //         <Animated.View>
-    //             <TouchableOpacity style={styles.closeButton} onPress={hideItem}>
-    //                 <Text style={styles.closeButtonText}>X</Text>
-    //             </TouchableOpacity>
-    //         </Animated.View>
-    //     )
-    // }
-
-
-    const [currentID, setCurrentID] = useState(null)
-    const currentItem = mytasks.find(item => item.id == currentID)
-    // const updateItem = mytasks.find(item => item.id == currentID)
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -160,6 +109,11 @@ const Tasks = props => {
 
             <View style={styles.container}>
                 <ButtonCreateTask />
+                <Icon
+                name='search'
+                type='font-awesome'
+                color='#545454'
+                />
                 <TextInput style={styles.input}>
                 </TextInput>
                 <FlatList style={styles.list}
@@ -169,19 +123,7 @@ const Tasks = props => {
                         onPress={() => setCurrentID(props.item.id)} />} />
             </View>
         </SafeAreaView>
-    )
-
-    // return (
-
-    //     <SafeAreaView style={{ flex: 1 }}>
-
-    //     {
-    //         updateItem && <UpdateItem item={updateItem} setCurrentID={setCurrentID} />
-    //     }
-
-    // </SafeAreaView>
-
-    // )
+    ) 
 }
 
 const styles = StyleSheet.create({
@@ -193,7 +135,7 @@ const styles = StyleSheet.create({
         marginTop: 100,
         marginLeft: 20,
         marginRight: 20,
-        marginBottom: 80,
+        marginBottom: 60,
         borderRadius: 30,
         shadowColor: '#545454',
         shadowOffset: {
@@ -214,13 +156,30 @@ const styles = StyleSheet.create({
     createTask: {
         justifyContent: 'center',
         alignItems: 'center',
+        alignSelf: 'flex-end',
         borderWidth: 1,
         width: '50%',
         height: 50,
         margin: 30,
+        marginTop: -20,
         backgroundColor: '#545454',
         borderRadius: 10,
     },
+
+    updateTaskButton:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        // alignSelf: 'flex-end',
+        borderWidth: 1,
+        width: '50%',
+        height: 50,
+        margin: 30,
+        // marginTop: -20,
+        backgroundColor: '#545454',
+        borderRadius: 10,
+
+    },
+
 
     createTaskTitle: {
         color: 'whitesmoke',
@@ -249,6 +208,7 @@ const styles = StyleSheet.create({
     activeItem: {
         backgroundColor: '#CFDEEC',
         position: 'absolute',
+        alignItems:'center',
         top: 0,
         left: 0,
         bottom: 0,

@@ -12,9 +12,9 @@ const TasksScreen = props => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ImageBackground source={BackgroundImg} style={styles.image}>
-                < TasksContextProvider>
+                {/* < TasksContextProvider> */}
                     <Tasks />
-                </ TasksContextProvider>
+                {/* </ TasksContextProvider> */}
             </ImageBackground>
         </SafeAreaView>
     )

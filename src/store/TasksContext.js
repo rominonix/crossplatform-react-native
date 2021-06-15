@@ -7,14 +7,20 @@ const TasksContextProvider = (props) => {
     const [tasks, setTasks] = useState([])
     const [taskName, setTaskName] = useState('')
     const [clientId, setClientId] = useState('')
-    // const [taskId, setTaskId] = useState('')
+    const [currentTask, setCurrentTask] = useState("")
+    const [currentTaskName, setCurrentTaskName] = useState("")
+    const [taskStatus, setTaskStatus] = useState(null)
     const [currentID, setCurrentID] = useState(null)
    
-  
 
     const getLatestTasks = async () => {
         const latestTasks = await API.gettasks(tasks)
         setTasks([...latestTasks.workerTask])
+    }
+
+    const getTask = async () => {
+        const getMyTask = await API.gettaskbyid(currentID)
+        setCurrentTaskName(getMyTask.task.taskName)
     }
 
     const createNewTask = async () => {
@@ -24,15 +30,13 @@ const TasksContextProvider = (props) => {
     }
 
     const updateTask = async () => {
-        const updTask = await API.updatetask(taskName, clientId)
-        setTaskName(updTask.taskName)
-        setClientId(updTask.clientId)
+        const updTask = await API.updatetask(currentID, taskName, clientId, taskStatus)
     }
 
     const deleteTask = async () => {
         console.log(currentID);
         const dltTask = await API.deletetask(currentID)
-        setCurrentID(dltTask.currentID)
+        // setCurrentID(dltTask.currentID)
     }
 
     return (
@@ -44,10 +48,13 @@ const TasksContextProvider = (props) => {
                 setTaskName,
                 clientId,
                 setClientId,
-                // taskId,
-                // setTaskId,
+                getTask,
                 currentID,
                 setCurrentID,
+                currentTask,
+                currentTaskName,
+                taskStatus,
+                setTaskStatus,
                 getLatestTasks,
                 createNewTask,
                 updateTask,

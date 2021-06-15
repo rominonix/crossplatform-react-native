@@ -1,6 +1,11 @@
+// import axios from 'axios'
+// const HOST = '192.168.1.154'
+// const API = axios.create(
+// {baseUrl:`http://${HOST}:3000`}
+// )
+
 import axios from 'axios'
 axios.defaults.baseURL = 'http://192.168.1.154:3000';
-
 const API = axios.create()
 
 export async function authenticate(email, password) {
@@ -24,6 +29,15 @@ export async function gettasks(tasks) {
    }
 }
 
+export async function gettaskbyid(taskId) {
+   const url =`/tasks/ ${taskId}` 
+   const response = await API.get(url)
+   if (response.status == 200) { 
+      return response.data }
+   else {
+      console.error({ msg: "error with tasks" })
+   }
+}
 
 export async function newtask(taskName, clientId) {
    const response = await API.post('/tasks', {taskName, clientId})
@@ -34,8 +48,9 @@ export async function newtask(taskName, clientId) {
    }
 }
 
-export async function updatetask(taskName, clientId) {
-   const response = await API.patch('/tasks/:id', {taskName, clientId})
+export async function updatetask(taskId,taskName, clientId, taskStatus) {
+   const url =`/tasks/ ${taskId}` 
+   const response = await API.patch(url, {taskName, clientId, taskStatus})
    if (response.status == 200) { 
       return response.data }
    else {
@@ -43,16 +58,12 @@ export async function updatetask(taskName, clientId) {
    }
 }
 
-export async function deletetask(currentID) {
-   console.log(currentID);
-   
-   
-  
-
-   const response = await API.delete('/tasks/',{params: currentID})
-   if (response.status == 200) { 
-      return response.data }
-   else {
-      console.error({ msg: "cannot delete task" })
-   }
-}
+// export async function deletetask(currentID) {
+//    console.log(currentID);
+//    const response = await API.delete('/tasks/',{params: currentID})
+//    if (response.status == 200) { 
+//       return response.data }
+//    else {
+//       console.error({ msg: "cannot delete task" })
+//    }
+// }

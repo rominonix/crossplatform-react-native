@@ -5,6 +5,7 @@ import { TasksContext } from '../store/TasksContext'
 
 const NewTask = props => {
        const addNewTask = useContext(TasksContext)
+       console.log(addNewTask.currentID)
        const newTaskHandler = async () => {
           const success = await addNewTask.createNewTask() 
           //alert o algo para que el cliente sepa que agrego un nuevo task

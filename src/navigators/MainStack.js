@@ -4,8 +4,9 @@ import HomeScreen from '../screens/HomeScreen'
 import Details from '../screens/Details'
 import ProfileScreen from '../screens/ProfileScreen'
 import TasksScreen from '../screens/TasksScreen'
+// import CreateTask from '../components/CreateTask'
 import CreateTask from '../screens/CreateTask'
-import UpdateScreen from '../screens/UpdateTask'
+import UpdateTaskScreen from '../screens/UpdateTaskScreen'
 
 const Stack = createStackNavigator()
 const MainStack = (props) => {
@@ -36,8 +37,8 @@ const MainStack = (props) => {
             />
 
             <Stack.Screen
-                name='UpdateScreen'
-                component={UpdateScreen}
+                name='UpdateTaskScreen'
+                component={UpdateTaskScreen}
                 options={{ headerShown: false }}
             />
 
