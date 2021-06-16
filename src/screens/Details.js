@@ -11,11 +11,12 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = props => {
    return (
 
-      <Tab.Navigator initialRouteName='Tasks'>
+      <Tab.Navigator initialRouteName='Tasks' >
          <Tab.Screen
             name="Settings"
             component={SettingsScreen}
             options={{ headerShown: false }}
+            
          />
          <Tab.Screen name="Messages" component={MessagesScreen} options={{ headerShown: false }} />
          <Tab.Screen name="Tasks" component={TasksScreen} options={{ headerShown: false }} />

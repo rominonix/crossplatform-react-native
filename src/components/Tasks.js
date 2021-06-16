@@ -4,11 +4,12 @@ import { TasksContext } from '../store/TasksContext'
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 
+
 const Tasks = props => {
 
     const tasksContext = useContext(TasksContext)
     let mytasks = tasksContext.tasks
-    let setCurrentID = tasksContext.setCurrentID 
+    let setCurrentID = tasksContext.setCurrentID
 
     useEffect(() => {
         tasksContext.getLatestTasks()
@@ -42,7 +43,7 @@ const Tasks = props => {
                 style={styles.updateTaskButton}
                 onPress={() =>
                     navigation.navigate('UpdateTaskScreen')}
-                >
+            >
                 <Text
                     style={styles.createTaskTitle}>
                     Update task
@@ -87,7 +88,13 @@ const Tasks = props => {
                 <TouchableOpacity style={styles.closeButton} onPress={hideItem}>
                     <Text style={styles.closeButtonText}>X</Text>
                 </TouchableOpacity>
-                <Text style={styles.itemText}>{item.taskName}</Text>
+                <View style={styles.editTaskName}>
+
+                    <Text style={styles.itemText}>{item.taskName}</Text>
+                    <TouchableOpacity style={styles.editTaskName}>
+                        <Image ></Image>
+                    </TouchableOpacity>
+                </View>
                 <Text style={styles.activeItemHeading} >{item.id}</Text>
 
                 <ButtonUpdateTask />
@@ -109,21 +116,24 @@ const Tasks = props => {
 
             <View style={styles.container}>
                 <ButtonCreateTask />
-                <Icon
-                name='search'
-                type='font-awesome'
-                color='#545454'
-                />
-                <TextInput style={styles.input}>
-                </TextInput>
+                <View style={styles.inputContainer}>
+                    <Icon
+                        name='search'
+                        type='font-awesome'
+                        color='#545454'
+                        style={{ marginTop: 20, marginRight: 20 }}
+                    />
+                    <TextInput style={styles.input} />
+                </View>
+
                 <FlatList style={styles.list}
                     data={mytasks}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => String(item.id)}
                     renderItem={(props) => <Item item={props.item}
                         onPress={() => setCurrentID(props.item.id)} />} />
             </View>
         </SafeAreaView>
-    ) 
+    )
 }
 
 const styles = StyleSheet.create({
@@ -148,9 +158,13 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         width: '65%',
         height: 30,
-        marginTop: 40,
+        marginTop: 20,
         borderRadius: 5,
         borderColor: '#545454',
+    },
+    inputContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
 
     createTask: {
@@ -166,7 +180,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
 
-    updateTaskButton:{
+    updateTaskButton: {
         justifyContent: 'center',
         alignItems: 'center',
         // alignSelf: 'flex-end',
@@ -191,7 +205,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     item: {
-        marginTop: 30,
+        marginTop: 10,
         marginLeft: 20,
         marginRight: 20,
         padding: 15,
@@ -208,14 +222,22 @@ const styles = StyleSheet.create({
     activeItem: {
         backgroundColor: '#CFDEEC',
         position: 'absolute',
-        alignItems:'center',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+        // top: 0,
+        // left: 0,
+        // bottom: 0,
+        // right: 0,
+        height: '78%',
+        marginTop: 80,
+        marginLeft: 20,
+        width: '90%',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
         zIndex: 1,
         padding: 30,
-        paddingTop: 60
+        paddingTop: 60,
+        backgroundColor: 'whitesmoke',
     },
 })
 
