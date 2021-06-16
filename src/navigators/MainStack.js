@@ -33,7 +33,9 @@ const MainStack = (props) => {
             <Stack.Screen
                 name='CreateTask'
                 component={CreateTask}
-                options={{ headerShown: false }}
+                options={{ 
+                    headerShown: false,
+                 }}
                 options={{
                     tabBarVisible: true,
                   }}

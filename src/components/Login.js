@@ -7,13 +7,9 @@ import  AsyncStorage  from '@react-native-async-storage/async-storage';
 
 const Login = props => {
    const loginContext = useContext(LoginContext)
-
-
-
    const loginHandler = async () => {
       try {
-         const success = await loginContext.login()
-         
+         const success = await loginContext.login() 
          await AsyncStorage.setItem('email', JSON.stringify(loginContext.email))
          await AsyncStorage.setItem('password', JSON.stringify(loginContext.password))
          props.navigation.navigate('Details')
@@ -81,7 +77,7 @@ const styles = StyleSheet.create({
    bgrImage: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
    },
    container: {
       flex: 1,
@@ -92,13 +88,15 @@ const styles = StyleSheet.create({
       },
       shadowOpacity: 0.32,
       shadowRadius: 5.46,
-      width: 300,
+      position: 'absolute',
+      top: 0,
       elevation: 9,
       marginTop: 180,
-      paddingTop: 50,
       marginBottom: 180,
+      padding:20,
       alignItems: 'center',
       backgroundColor: '#CFDEEC',
+      justifyContent: 'center',
       borderRadius: 10
    },
    label: {
