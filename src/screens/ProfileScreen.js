@@ -6,7 +6,7 @@ import { UserContextProvider } from '../store/UserContext'
 import picture from '../assets/portait.png'
 import { ActionSheet, Root } from 'native-base'
 import { LoginContext } from '../store/LoginContext'
-import { AsyncStorage } from 'react-native';
+import  AsyncStorage  from '@react-native-async-storage/async-storage';
 import { TextInput } from 'react-native-gesture-handler'
 
 const ProfileScreen = props => {
@@ -64,8 +64,8 @@ const ProfileScreen = props => {
    
    const getData=async()=>{
       try{
-         const userEmail=await AsyncStorage.getItem('email')
-         const userPass=await AsyncStorage.getItem('password')
+         const userEmail=JSON.parse(await AsyncStorage.getItem('email'))
+         const userPass=JSON.parse(await AsyncStorage.getItem('password'))
          if(userEmail != null){
             setUser(userEmail) 
          }

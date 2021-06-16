@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { SafeAreaView, View, StyleSheet, TextInput, FlatList, Text, TouchableOpacity, Animated } from 'react-native'
+import { SafeAreaView, View, StyleSheet, TextInput, FlatList, Text, TouchableOpacity, Animated, Image, CheckBox } from 'react-native'
 import { TasksContext } from '../store/TasksContext'
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import { Icon } from 'react-native-elements'
 // import Swipeable from './Swipeable';
 
 
@@ -58,17 +58,19 @@ const Tasks = props => {
 
     const Item = ({ item, onPress }) => {
         return (
-                <View>
-                    <TouchableOpacity style={styles.item} onPress={onPress}>
-                        <Text style={styles.itemText}>{item.taskName}</Text>
-                    </TouchableOpacity>
-                </View>
+            <View>
+                <TouchableOpacity style={styles.item} onPress={onPress}>
+                    <Text style={styles.itemText}>{item.taskName}</Text>
+                </TouchableOpacity>
+            </View>
         )
     }
 
     const ActiveItem = ({ setCurrentID, item }) => {
         const scale = new Animated.Value(0)
-
+        const [isNew, setNew] = useState(false);
+        const [isInprograss, setInprograss] = useState(false)
+        const [isDone, setDone] = useState(false)
         useEffect(() => {
             Animated.timing(scale, {
                 toValue: 1,
@@ -90,16 +92,50 @@ const Tasks = props => {
         return (
             <Animated.View style={[styles.activeItem, { transform: [{ scale }] }]}>
                 <TouchableOpacity style={styles.closeButton} onPress={hideItem}>
-                    <MaterialCommunityIcons name='window-close' size={30} color={'#545454'}/>
+                    <MaterialCommunityIcons name='window-close' size={30} color={'#545454'} />
                 </TouchableOpacity>
-                <View style={styles.editTaskName}>
-
-                    <Text style={styles.itemText}>{item.taskName}</Text>
-                    <TouchableOpacity style={styles.editTaskName}>
-                        <Image ></Image>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 30 }}>
+                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 20 }}>{item.taskName}</Text>
+                    <TouchableOpacity style={{ justifyContent: 'flex-end' }}>
+                        <Image style={{ width: 20, height: 20 }} source={require('../assets/update-icon1.png')}></Image>
                     </TouchableOpacity>
                 </View>
-                <Text style={styles.activeItemHeading} >{item.id}</Text>
+                <View style={{ flexDirection: 'row', marginTop: 30 }}>
+                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 20 }}>Client ID: </Text>
+                    <Text style={styles.activeItemHeading} >{item.id}</Text>
+                </View>
+                <View style={{ marginTop: 30, flex: 1, justifyContent: 'flex-start', }}>
+                    <Text style={{ fontSize: 20 }}>Task images:</Text>
+                    <View style={{ width: 40, height: 40, borderWidth: 3, borderStyle: 'dotted', borderRadius: 1, marginTop: 10 }} />
+                </View>
+                <View style={{ flexDirection: 'row' ,marginTop: '30%'}}>
+                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 20 }}>Messages:</Text>
+                    <View style={{ marginTop: 30, marginRight: '30%' }}>
+                        <Text >Messages 1</Text>
+                        <Text >Messages 2</Text>
+                        <Text >Messages 3</Text>
+                        <Text >View more +</Text>
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row', marginTop: 30 }}>
+                    <Text style={{ fontSize: 20 ,marginRight:45}}>Status:</Text>
+                    <View style={{ flexDirection: 'row',justifyContent: 'space-between', flex: 1 }}>
+                        <View style={{ margin: 0 }}>
+                            <CheckBox value={isNew} onValueChange={setNew} style={styles.checkbox} />
+                            <Text >New</Text>
+                        </View>
+                        <View>
+                            <CheckBox value={isInprograss} onValueChange={setInprograss} style={styles.checkbox} />
+                            <Text >In prograss</Text>
+                        </View>
+                        <View>
+                            <CheckBox value={isDone} onValueChange={setDone} style={styles.checkbox} />
+                            <Text >Done</Text>
+                        </View>
+                    </View>
+
+                </View>
+
 
                 <ButtonUpdateTask />
 
@@ -148,7 +184,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'whitesmoke',
         width: 'auto',
-        paddingTop:40,
+        paddingTop: 40,
         marginTop: 100,
         marginLeft: 20,
         marginRight: 20,
@@ -183,10 +219,10 @@ const styles = StyleSheet.create({
         width: '40%',
         height: 50,
         top: -20,
-        right:30,
+        right: 30,
         backgroundColor: '#545454',
         borderRadius: 8,
-        zIndex:0
+        zIndex: 0
     },
 
     updateTaskButton: {
@@ -207,7 +243,7 @@ const styles = StyleSheet.create({
 
     closeButton: {
         alignSelf: 'flex-end',
-      },
+    },
 
     list: {
         width: '90%',
@@ -248,13 +284,13 @@ const styles = StyleSheet.create({
         paddingTop: 60,
         backgroundColor: 'whitesmoke',
     },
-    contentActiveItem:{
+    contentActiveItem: {
         flex: 1,
-        alignItems:'baseline',
+        alignItems: 'baseline',
         backgroundColor: 'whitesmoke',
         width: 340,
-        paddingTop:40,
-        paddingLeft:30,
+        paddingTop: 40,
+        paddingLeft: 30,
         marginTop: 20,
         borderRadius: 20,
         shadowColor: '#545454',
@@ -265,7 +301,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.6,
     }
 
-    
+
 })
 
 export default Tasks

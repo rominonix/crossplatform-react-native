@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {  Text, Button, View, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native'
+import { Text, Button, View, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native'
 
 import { LoginContext } from '../store/LoginContext'
-import  {AsyncStorage}  from 'react-native';
+import  AsyncStorage  from '@react-native-async-storage/async-storage';
 
 
 const Login = props => {
@@ -11,29 +11,30 @@ const Login = props => {
 
 
    const loginHandler = async () => {
-      try{
-         const success = await loginContext.login()     
-         await AsyncStorage.setItem('email',loginContext.email)
-         await AsyncStorage.setItem('password',loginContext.password)
-         props.navigation.navigate('Details')      
-      }catch(err){
+      try {
+         const success = await loginContext.login()
+         
+         await AsyncStorage.setItem('email', JSON.stringify(loginContext.email))
+         await AsyncStorage.setItem('password', JSON.stringify(loginContext.password))
+         props.navigation.navigate('Details')
+      } catch (err) {
          console.log(err)
       }
    }
-   const getStorageData=async()=>{
-      try{
-         let userEmail=await AsyncStorage.getItem('email')
-         let userPass= await AsyncStorage.getItem('password')
-         if(userEmail != null){
+   const getStorageData = async () => {
+      try {
+         let userEmail = JSON.parse(await AsyncStorage.getItem('email'))
+         let userPass = JSON.parse(await AsyncStorage.getItem('password')) 
+         if (userEmail != null) {
             userEmail = loginContext.setEmail(userEmail)
-            userPass = loginContext.setPassword(userPass)
+            userPass =loginContext.setPassword(userPass)
          }
-      }catch(err){
+      } catch (err) {
          console.log(err)
       }
    }
-   useEffect(()=>{
-      return()=>{
+   useEffect(() => {
+      return () => {
          getStorageData()
       }
    })
@@ -45,28 +46,31 @@ const Login = props => {
    return (
 
       <ImageBackground source={bgrImage} style={styles.bgrImage}>
-         
-         <View style={styles.container}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput underlineColorAndroid='transparent' style={styles.input} autoCapitalize='none'
-               onChangeText={loginContext.setEmail}
-               value={loginContext.email}
-            >
-            </TextInput>
-            <Text style={styles.label}>Password</Text>
-            <TextInput secureTextEntry={true} underlineColorAndroid='transparent' style={styles.input}
-               onChangeText={loginContext.setPassword}
-               value={loginContext.password}
-            >
-            </TextInput>
-            <TouchableOpacity style={styles.buttonContainer} onPress={loginHandler} onHover={{ backgroundColor: 'blue' }}>
-               <Text style={{ color: '#F5F5F5', margin: 5 }}>SIGN IN</Text>
-            </TouchableOpacity>
-         {/* <Text style={styles.title}>INGE BRA BYGG</Text> */}
-      </View>
-   </ImageBackground> 
+         <View style={styles.wrapper}>
+
+            <View style={styles.container}>
+               <Text style={styles.label}>Email</Text>
+               <TextInput underlineColorAndroid='transparent' style={styles.input} autoCapitalize='none'
+                  onChangeText={loginContext.setEmail}
+                  value={loginContext.email}
+               >
+               </TextInput>
+               <Text style={styles.label}>Password</Text>
+               <TextInput secureTextEntry={true} underlineColorAndroid='transparent' style={styles.input}
+                  onChangeText={loginContext.setPassword}
+                  value={loginContext.password}
+               >
+               </TextInput>
+               <TouchableOpacity style={styles.buttonContainer} onPress={loginHandler} onHover={{ backgroundColor: 'blue' }}>
+                  <Text style={{ color: '#F5F5F5', margin: 5 }}>SIGN IN</Text>
+               </TouchableOpacity>
+               {/* <Text style={styles.title}>INGE BRA BYGG</Text> */}
+            </View>
+         </View>
+      </ImageBackground>
    )
 }
+
 
 const styles = StyleSheet.create({
    wrapper: {
@@ -88,10 +92,10 @@ const styles = StyleSheet.create({
       },
       shadowOpacity: 0.32,
       shadowRadius: 5.46,
-      width:300,
+      width: 300,
       elevation: 9,
       marginTop: 180,
-      paddingTop:50,
+      paddingTop: 50,
       marginBottom: 180,
       alignItems: 'center',
       backgroundColor: '#CFDEEC',
@@ -115,10 +119,10 @@ const styles = StyleSheet.create({
       backgroundColor: '#F5F5F5'
    },
    buttonContainer: {
-      width:120,
-      height:50,
+      width: 120,
+      height: 50,
       justifyContent: 'center',
-      alignItems: 'center', 
+      alignItems: 'center',
       borderRadius: 10,
       marginTop: 40,
       backgroundColor: '#5A5454'
