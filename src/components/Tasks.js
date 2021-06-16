@@ -2,12 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import { SafeAreaView, View, StyleSheet, TextInput, FlatList, Text, TouchableOpacity, Animated } from 'react-native'
 import { TasksContext } from '../store/TasksContext'
 import { useNavigation } from '@react-navigation/native';
-import { Icon } from 'react-native-elements';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+// import Swipeable from './Swipeable';
+
 
 
 const Tasks = props => {
 
     const tasksContext = useContext(TasksContext)
+    // const loginContext = useContext(LoginContext)
     let mytasks = tasksContext.tasks
     let setCurrentID = tasksContext.setCurrentID
 
@@ -25,7 +29,7 @@ const Tasks = props => {
         const navigation = useNavigation()
         return (
             <TouchableOpacity
-                style={styles.createTask}
+                style={styles.createTaskButton}
                 onPress={() =>
                     navigation.navigate('CreateTask')}>
                 <Text
@@ -54,11 +58,11 @@ const Tasks = props => {
 
     const Item = ({ item, onPress }) => {
         return (
-            <View>
-                <TouchableOpacity style={styles.item} onPress={onPress}>
-                    <Text style={styles.itemText}>{item.taskName}</Text>
-                </TouchableOpacity>
-            </View>
+                <View>
+                    <TouchableOpacity style={styles.item} onPress={onPress}>
+                        <Text style={styles.itemText}>{item.taskName}</Text>
+                    </TouchableOpacity>
+                </View>
         )
     }
 
@@ -86,7 +90,7 @@ const Tasks = props => {
         return (
             <Animated.View style={[styles.activeItem, { transform: [{ scale }] }]}>
                 <TouchableOpacity style={styles.closeButton} onPress={hideItem}>
-                    <Text style={styles.closeButtonText}>X</Text>
+                    <MaterialCommunityIcons name='window-close' size={30} color={'#545454'}/>
                 </TouchableOpacity>
                 <View style={styles.editTaskName}>
 
@@ -108,6 +112,8 @@ const Tasks = props => {
     }
 
     return (
+
+
         <SafeAreaView style={{ flex: 1 }}>
 
             {
@@ -142,11 +148,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'whitesmoke',
         width: 'auto',
+        paddingTop:40,
         marginTop: 100,
         marginLeft: 20,
         marginRight: 20,
-        marginBottom: 60,
-        borderRadius: 30,
+        marginBottom: 30,
+        borderRadius: 20,
         shadowColor: '#545454',
         shadowOffset: {
             width: 5,
@@ -167,38 +174,40 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
 
-    createTask: {
+    createTaskButton: {
+        position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'flex-end',
         borderWidth: 1,
-        width: '50%',
+        width: '40%',
         height: 50,
-        margin: 30,
-        marginTop: -20,
+        top: -20,
+        right:30,
         backgroundColor: '#545454',
-        borderRadius: 10,
+        borderRadius: 8,
+        zIndex:0
     },
 
     updateTaskButton: {
         justifyContent: 'center',
         alignItems: 'center',
-        // alignSelf: 'flex-end',
         borderWidth: 1,
         width: '50%',
         height: 50,
         margin: 30,
-        // marginTop: -20,
         backgroundColor: '#545454',
-        borderRadius: 10,
-
+        borderRadius: 8,
     },
-
 
     createTaskTitle: {
         color: 'whitesmoke',
         textTransform: 'uppercase'
     },
+
+    closeButton: {
+        alignSelf: 'flex-end',
+      },
 
     list: {
         width: '90%',
@@ -239,6 +248,24 @@ const styles = StyleSheet.create({
         paddingTop: 60,
         backgroundColor: 'whitesmoke',
     },
+    contentActiveItem:{
+        flex: 1,
+        alignItems:'baseline',
+        backgroundColor: 'whitesmoke',
+        width: 340,
+        paddingTop:40,
+        paddingLeft:30,
+        marginTop: 20,
+        borderRadius: 20,
+        shadowColor: '#545454',
+        shadowOffset: {
+            width: 5,
+            height: 5,
+        },
+        shadowOpacity: 0.6,
+    }
+
+    
 })
 
 export default Tasks
