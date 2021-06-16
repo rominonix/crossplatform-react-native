@@ -1,67 +1,137 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { SafeAreaView, Text, Button, View, StyleSheet, TextInput } from 'react-native'
+import { Text, Button, View, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native'
+
 import { LoginContext } from '../store/LoginContext'
+import  AsyncStorage  from '@react-native-async-storage/async-storage';
+
 
 const Login = props => {
    const loginContext = useContext(LoginContext)
-   const loginHandler = async () => { 
-      const success = await loginContext.login()
-      props.navigation.navigate('UserProfile')}
 
 
-      return (
-         <SafeAreaView style={{ flex: 1 }}>
-            <View style={styles.container}>
-               <View style={styles.content}>
-                  <Text style={styles.emailLabel}>Email</Text>
-                  <TextInput underlineColorAndroid='transparent' style={styles.input} autoCapitalize='none' placeholder="Your username"
-                     onChangeText={loginContext.setEmail}
-                     value={loginContext.email}
-                  >
-                  </TextInput>
-                  <Text style={styles.passwordLabel}>Password</Text>
-                  <TextInput secureTextEntry={true} underlineColorAndroid='transparent' style={styles.input} placeholder="Password"
-                     onChangeText={loginContext.setPassword}
-                     value={loginContext.password}
-                  >
-                  </TextInput>
-                  <Button title="Sign in" style={styles.buttonContainer} onPress={loginHandler}></Button>
-               </View>
-            </View>
-         </SafeAreaView>
-      )
+
+   const loginHandler = async () => {
+      try {
+         const success = await loginContext.login()
+         
+         await AsyncStorage.setItem('email', JSON.stringify(loginContext.email))
+         await AsyncStorage.setItem('password', JSON.stringify(loginContext.password))
+         props.navigation.navigate('Details')
+      } catch (err) {
+         console.log(err)
+      }
    }
-
-const styles = StyleSheet.create({
-      container: {
-         flex: 1,
-
-      },
-      content: {
-         opacity: 0.9,
-         backgroundColor: 'white',
-         borderWidth: 2,
-         margin: 10,
-         alignItems: 'center',
-      },
-      emailLabel: {
-         color: 'blue',
-      },
-      input: {
-         borderRadius: 10,
-         padding: 10,
-         color: 'black',
-         borderWidth: 2,
-         borderColor: 'lightgray',
-         width: 200,
-         margin: 5,
-      },
-      buttonContainer: {
-         margin: 10,
-         padding: 10,
-         justifyContent: 'center',
-         alignItems: 'center',
+   const getStorageData = async () => {
+      try {
+         let userEmail = JSON.parse(await AsyncStorage.getItem('email'))
+         let userPass = JSON.parse(await AsyncStorage.getItem('password')) 
+         if (userEmail != null) {
+            userEmail = loginContext.setEmail(userEmail)
+            userPass =loginContext.setPassword(userPass)
+         }
+      } catch (err) {
+         console.log(err)
+      }
+   }
+   useEffect(() => {
+      return () => {
+         getStorageData()
       }
    })
 
-   export default Login
+
+
+   const bgrImage = require('../assets/android4.png')
+
+   return (
+
+      <ImageBackground source={bgrImage} style={styles.bgrImage}>
+         <View style={styles.wrapper}>
+
+            <View style={styles.container}>
+               <Text style={styles.label}>Email</Text>
+               <TextInput underlineColorAndroid='transparent' style={styles.input} autoCapitalize='none'
+                  onChangeText={loginContext.setEmail}
+                  value={loginContext.email}
+               >
+               </TextInput>
+               <Text style={styles.label}>Password</Text>
+               <TextInput secureTextEntry={true} underlineColorAndroid='transparent' style={styles.input}
+                  onChangeText={loginContext.setPassword}
+                  value={loginContext.password}
+               >
+               </TextInput>
+               <TouchableOpacity style={styles.buttonContainer} onPress={loginHandler} onHover={{ backgroundColor: 'blue' }}>
+                  <Text style={{ color: '#F5F5F5', margin: 5 }}>SIGN IN</Text>
+               </TouchableOpacity>
+               {/* <Text style={styles.title}>INGE BRA BYGG</Text> */}
+            </View>
+         </View>
+      </ImageBackground>
+   )
+}
+
+
+const styles = StyleSheet.create({
+   wrapper: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+   },
+   bgrImage: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+   },
+   container: {
+      flex: 1,
+      shadowColor: "#000",
+      shadowOffset: {
+         width: 0,
+         height: 4,
+      },
+      shadowOpacity: 0.32,
+      shadowRadius: 5.46,
+      width: 300,
+      elevation: 9,
+      marginTop: 180,
+      paddingTop: 50,
+      marginBottom: 180,
+      alignItems: 'center',
+      backgroundColor: '#CFDEEC',
+      borderRadius: 10
+   },
+   label: {
+      color: '#5A5454',
+      alignSelf: 'flex-start',
+      marginLeft: 50,
+      marginBottom: 5,
+      marginTop: 30
+   },
+
+   input: {
+      borderRadius: 10,
+      padding: 10,
+      width: 230,
+      marginTop: 5,
+      marginLeft: 20,
+      marginRight: 20,
+      backgroundColor: '#F5F5F5'
+   },
+   buttonContainer: {
+      width: 120,
+      height: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 10,
+      marginTop: 40,
+      backgroundColor: '#5A5454'
+   },
+   title: {
+      fontSize: 30,
+      marginTop: 150,
+      color: '#5A5454'
+   }
+})
+
+export default Login
