@@ -1,13 +1,43 @@
-import React, { useContext } from 'react'
-import { Text, View, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import {  Text, Button, View, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native'
+
 import { LoginContext } from '../store/LoginContext'
+import  {AsyncStorage}  from 'react-native';
 
 const Login = props => {
    const loginContext = useContext(LoginContext)
+
+
+
    const loginHandler = async () => {
-      const success = await loginContext.login()
-      props.navigation.navigate('Details')
+      try{
+         const success = await loginContext.login()     
+         await AsyncStorage.setItem('email',loginContext.email)
+         await AsyncStorage.setItem('password',loginContext.password)
+         props.navigation.navigate('Details')      
+      }catch(err){
+         console.log(err)
+      }
    }
+   const getStorageData=async()=>{
+      try{
+         let userEmail=await AsyncStorage.getItem('email')
+         let userPass= await AsyncStorage.getItem('password')
+         if(userEmail != null){
+            userEmail = loginContext.setEmail(userEmail)
+            userPass = loginContext.setPassword(userPass)
+         }
+      }catch(err){
+         console.log(err)
+      }
+   }
+   useEffect(()=>{
+      return()=>{
+         getStorageData()
+      }
+   })
+
+
 
    const bgrImage = require('../assets/background-login1.png')
 
