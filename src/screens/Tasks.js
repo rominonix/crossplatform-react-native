@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Icon } from 'react-native-elements'
 // import Swipeable from './Swipeable';
-
+import ActiveItem from './ActiveItemScreen';
 
 
 const Tasks = props => {
@@ -95,32 +95,30 @@ const Tasks = props => {
                     <MaterialCommunityIcons name='window-close' size={30} color={'#545454'} />
                 </TouchableOpacity>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 30 }}>
-                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 18 }}>{item.taskName}</Text>
+                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 20 }}>{item.taskName}</Text>
                     <TouchableOpacity style={{ justifyContent: 'flex-end' }}>
                         <Image style={{ width: 20, height: 20 }} source={require('../assets/update-icon1.png')}></Image>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 30 }}>
-                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 18 }}>Client ID: </Text>
+                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 20 }}>Client ID: </Text>
                     <Text style={styles.activeItemHeading} >{item.id}</Text>
                 </View>
                 <View style={{ marginTop: 30, flex: 1, justifyContent: 'flex-start', }}>
-                    <Text style={{ fontSize: 18 }}>Task images:</Text>
-                    <View style={{ width: 50, height: 50, borderWidth: 1, borderStyle: 'dashed', borderRadius: 1, marginTop: 10 }} />
+                    <Text style={{ fontSize: 20 }}>Task images:</Text>
+                    <View style={{ width: 40, height: 40, borderWidth: 3, borderStyle: 'dashed', borderRadius: 1, marginTop: 10 }} />
                 </View>
                 <View style={{ flexDirection: 'row' ,marginTop: '30%'}}>
-                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 18 }}>Messages:</Text>
+                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 20 }}>Messages:</Text>
                     <View style={{ marginTop: 30, marginRight: '30%' }}>
                         <Text >Messages 1</Text>
                         <Text >Messages 2</Text>
                         <Text >Messages 3</Text>
-                        <TouchableOpacity style={{ marginTop: 30,  }}>
-                            <Text >Load more +</Text>
-                        </TouchableOpacity>
+                        <Text >View more +</Text>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 30 }}>
-                    <Text style={{ fontSize: 18 ,marginRight:45}}>Status:</Text>
+                    <Text style={{ fontSize: 20 ,marginRight:45}}>Status:</Text>
                     <View style={{ flexDirection: 'row',justifyContent: 'space-between', flex: 1 }}>
                         <View style={{ margin: 0 }}>
                             <CheckBox value={isNew} onValueChange={setNew} style={styles.checkbox} />
@@ -267,7 +265,7 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     activeItem: {
-        backgroundColor: 'whitesmoke',
+        backgroundColor: '#CFDEEC',
         position: 'absolute',
         alignItems: 'center',
         justifyContent: 'center',
@@ -275,15 +273,16 @@ const styles = StyleSheet.create({
         // left: 0,
         // bottom: 0,
         // right: 0,
-        height: '85%',
+        height: '78%',
         marginTop: 80,
         marginLeft: 20,
-        marginRight:20,
         width: '90%',
-        borderRadius: 20,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
         zIndex: 1,
         padding: 30,
-        paddingTop: 40,
+        paddingTop: 60,
+        // backgroundColor: 'whitesmoke',
     },
     contentActiveItem: {
         flex: 1,

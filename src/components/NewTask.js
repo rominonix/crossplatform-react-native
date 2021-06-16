@@ -15,13 +15,13 @@ const NewTask = props => {
 
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
-                <Text style={styles.label}>task title: </Text>
+                <Text style={styles.label}>Task title: </Text>
                 <TextInput style={styles.input}
                  onChangeText={addNewTask.setTaskName}
                  value={addNewTask.taskName}>
                 </TextInput>
 
-                <Text style={styles.label}>client name / Id: </Text>
+                <Text style={styles.label}>Client Id: </Text>
                 <TextInput style={styles.input}
                  onChangeText={addNewTask.setClientId}
                  value={addNewTask.clientId}>
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'whitesmoke',
         width: 'auto',
+        paddingTop:60,
         marginTop: 100,
         marginLeft: 20,
         marginRight: 20,
@@ -60,12 +61,14 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         width: '65%',
         height: 30,
-        marginTop: 40,
+        marginBottom: 40,
+        marginTop:10,
         borderRadius: 5,
         borderColor: '#545454',
     },
     label: {
         color: '#545454',
+        fontSize:18,
     },
 
     addTaskButton: {
