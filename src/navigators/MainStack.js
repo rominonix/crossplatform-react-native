@@ -45,6 +45,9 @@ const MainStack = (props) => {
                 name='UpdateTaskScreen'
                 component={UpdateTaskScreen}
                 options={{ headerShown: false }}
+                options={{
+                    tabBarVisible: true,
+                  }}
             />
 
             <Stack.Screen
