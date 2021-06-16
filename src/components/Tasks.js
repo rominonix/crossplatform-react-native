@@ -114,7 +114,9 @@ const Tasks = props => {
                         <Text >Messages 1</Text>
                         <Text >Messages 2</Text>
                         <Text >Messages 3</Text>
-                        <Text >View more +</Text>
+                        <TouchableOpacity style={{ marginTop: 30,  }}>
+                            <Text >Load more +</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 30 }}>
