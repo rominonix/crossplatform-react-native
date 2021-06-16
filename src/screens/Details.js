@@ -13,12 +13,36 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = props => {
    return (
 
-      <Tab.Navigator initialRouteName='Tasks' >
+      <Tab.Navigator
+         initialRouteName='Tasks'
+         tabBarOptions={{
+            activeTintColor: '#CFDEEC',
+            activeBackgroundColor: '#545454',
+            style: {
+               height: 54,
+               backgroundColor: '#f5f5f5'
+            },
+            tabStyle: {
+               width: 'auto',
+               paddingTop: 10
+            },
+            labelStyle: {
+               fontSize: 10,
+               margin: 0,
+               padding: 5,
+            }
+
+         }}>
          <Tab.Screen
             name="Settings"
             component={SettingsScreen}
-            options={{ headerShown: false }}
-            
+            options={{
+               headerShown: false,
+               tabBarLabel: 'Settings',
+               tabBarIcon: ({ color, size }) => (
+                  <MaterialCommunityIcons name='cog-outline' color={color} size={size} />
+               ),
+            }}
          />
          <Tab.Screen
             name="Messages"
