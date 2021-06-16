@@ -106,7 +106,7 @@ const Tasks = props => {
                 </View>
                 <View style={{ marginTop: 30, flex: 1, justifyContent: 'flex-start', }}>
                     <Text style={{ fontSize: 20 }}>Task images:</Text>
-                    <View style={{ width: 40, height: 40, borderWidth: 3, borderStyle: 'dotted', borderRadius: 1, marginTop: 10 }} />
+                    <View style={{ width: 40, height: 40, borderWidth: 3, borderStyle: 'dashed', borderRadius: 1, marginTop: 10 }} />
                 </View>
                 <View style={{ flexDirection: 'row' ,marginTop: '30%'}}>
                     <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 20 }}>Messages:</Text>
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
         zIndex: 1,
         padding: 30,
         paddingTop: 60,
-        backgroundColor: 'whitesmoke',
+        // backgroundColor: 'whitesmoke',
     },
     contentActiveItem: {
         flex: 1,
