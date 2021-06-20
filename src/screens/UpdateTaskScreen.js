@@ -1,7 +1,7 @@
 import React from 'react'
 import { TasksContextProvider } from '../store/TasksContext'
 import { SafeAreaView, Text, ImageBackground, StyleSheet } from 'react-native'
-import EditTask from '../components/EditTask'
+import EditTask from '../components/UpdateTask'
 
 import BackgroundImg from '../assets/inside-background.png'
 

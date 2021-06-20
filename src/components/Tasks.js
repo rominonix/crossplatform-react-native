@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { SafeAreaView, View, StyleSheet, TextInput, FlatList, Text, TouchableOpacity, Animated, Image, CheckBox } from 'react-native'
 import { TasksContext } from '../store/TasksContext'
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ButtonUpdateTask, ButtonCreateTask } from './TaskButtons'
 import { Icon } from 'react-native-elements'
 // import Swipeable from './Swipeable';
-
 
 
 const Tasks = props => {
 
     const tasksContext = useContext(TasksContext)
-    // const loginContext = useContext(LoginContext)
     let mytasks = tasksContext.tasks
     let setCurrentID = tasksContext.setCurrentID
 
@@ -19,42 +18,39 @@ const Tasks = props => {
         tasksContext.getLatestTasks()
     }, [])
 
-    // const deleteAtask = async () =>  {
-    //     const deleteSuccess = await tasksContext.deleteTask(currentID)  
-    // }
 
     const currentItem = mytasks.find(item => item.id == tasksContext.currentID)
 
-    const ButtonCreateTask = () => {
-        const navigation = useNavigation()
-        return (
-            <TouchableOpacity
-                style={styles.createTaskButton}
-                onPress={() =>
-                    navigation.navigate('CreateTask')}>
-                <Text
-                    style={styles.createTaskTitle}>
-                    Create task
-                </Text>
-            </TouchableOpacity>
-        )
-    }
+    // const ButtonCreateTask = () => {
+    //     const navigation = useNavigation()
+    //     return (
+    //         <TouchableOpacity
+    //             style={styles.createTaskButton}
+    //             onPress={() =>
+    //                 navigation.navigate('CreateTask')}>
+    //             <Text
+    //                 style={styles.createTaskTitle}>
+    //                 Create task
+    //             </Text>
+    //         </TouchableOpacity>
+    //     )
+    // }
 
-    const ButtonUpdateTask = () => {
-        const navigation = useNavigation()
-        return (
-            <TouchableOpacity
-                style={styles.updateTaskButton}
-                onPress={() =>
-                    navigation.navigate('UpdateTaskScreen')}
-            >
-                <Text
-                    style={styles.createTaskTitle}>
-                    Update task
-                </Text>
-            </TouchableOpacity>
-        )
-    }
+    // const ButtonUpdateTask = () => {
+    //     const navigation = useNavigation()
+    //     return (
+    //         <TouchableOpacity
+    //             style={styles.updateTaskButton}
+    //             onPress={() =>
+    //                 navigation.navigate('UpdateTaskScreen')}
+    //         >
+    //             <Text
+    //                 style={styles.createTaskTitle}>
+    //                 Update task
+    //             </Text>
+    //         </TouchableOpacity>
+    //     )
+    // }
 
     const Item = ({ item, onPress }) => {
         return (
@@ -108,20 +104,20 @@ const Tasks = props => {
                     <Text style={{ fontSize: 18 }}>Task images:</Text>
                     <View style={{ width: 50, height: 50, borderWidth: 1, borderStyle: 'dashed', borderRadius: 1, marginTop: 10 }} />
                 </View>
-                <View style={{ flexDirection: 'row' ,marginTop: '30%'}}>
+                <View style={{ flexDirection: 'row', marginTop: '30%' }}>
                     <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 18 }}>Messages:</Text>
                     <View style={{ marginTop: 30, marginRight: '30%' }}>
                         <Text >Messages 1</Text>
                         <Text >Messages 2</Text>
                         <Text >Messages 3</Text>
-                        <TouchableOpacity style={{ marginTop: 30,  }}>
+                        <TouchableOpacity style={{ marginTop: 30, }}>
                             <Text >Load more +</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 30 }}>
-                    <Text style={{ fontSize: 18 ,marginRight:45}}>Status:</Text>
-                    <View style={{ flexDirection: 'row',justifyContent: 'space-between', flex: 1 }}>
+                    <Text style={{ fontSize: 18, marginRight: 45 }}>Status:</Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1 }}>
                         <View style={{ margin: 0 }}>
                             <CheckBox value={isNew} onValueChange={setNew} style={styles.checkbox} />
                             <Text >New</Text>
@@ -137,13 +133,7 @@ const Tasks = props => {
                     </View>
 
                 </View>
-
-
                 <ButtonUpdateTask />
-
-                {/* <TouchableOpacity style={styles.item}>
-                    <Text style={styles.itemText} onPress={deleteAtask}>DELETE</Text>
-                </TouchableOpacity> */}
             </Animated.View>
         )
 
@@ -278,7 +268,7 @@ const styles = StyleSheet.create({
         height: '85%',
         marginTop: 80,
         marginLeft: 20,
-        marginRight:20,
+        marginRight: 20,
         width: '90%',
         borderRadius: 20,
         zIndex: 1,
