@@ -6,7 +6,7 @@ import ProfileScreen from '../screens/ProfileScreen'
 import TasksScreen from '../screens/TasksScreen'
 // import CreateTask from '../components/CreateTask'
 import CreateTask from '../screens/CreateTask'
-import UpdateTaskScreen from '../screens/UpdateTaskScreen'
+import UpdateTask from '../components/UpdateTask'
 
 const Stack = createStackNavigator()
 const MainStack = (props) => {
@@ -30,7 +30,7 @@ const MainStack = (props) => {
                 options={{ headerShown: false }}
             />
 
-            <Stack.Screen
+            {/* <Stack.Screen
                 name='CreateTask'
                 component={CreateTask}
                 options={{ 
@@ -39,15 +39,21 @@ const MainStack = (props) => {
                 options={{
                     tabBarVisible: true,
                   }}
-            />
+            /> */}
 
             <Stack.Screen
-                name='UpdateTaskScreen'
-                component={UpdateTaskScreen}
-                options={{ headerShown: false }}
+                name='UpdateTask'
+                component={UpdateTask}
+
                 options={{
-                    tabBarVisible: true,
-                  }}
+                    headerShown: false,
+                    
+                }}
+                // options={{ 
+                //     headerShown: false }}
+                // options={{
+                //     tabBarVisible: true,
+                //   }}
             />
 
             <Stack.Screen

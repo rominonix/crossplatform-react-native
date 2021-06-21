@@ -4,17 +4,13 @@ import { SafeAreaView, View, StyleSheet, TextInput, Text, TouchableOpacity} from
 import { TasksContext } from '../store/TasksContext'
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
-const EditTask = props => {
+const UpdateTask = props => {
 
-    const onSingleTapEvent = (event) => {
-        if (event.nativeEvent.state === State.ACTIVE) {
-            alert('Add the task name and the client ID to your task');
-        }
-    };
-    
-    
-    
-    
+    // const onSingleTapEvent = (event) => {
+    //     if (event.nativeEvent.state === State.ACTIVE) {
+    //         alert('Add the task name and the client ID to your task');
+    //     }
+    // };
     
     const tasksContext = useContext(TasksContext)
     const update = async () => {
@@ -60,14 +56,14 @@ const EditTask = props => {
                 >
                     <Text style={styles.confirmTitle}>Confirm</Text>
                 </TouchableOpacity>
-                <TapGestureHandler
+                {/* <TapGestureHandler
                     onHandlerStateChange={onSingleTapEvent}
                     // waitFor={doubleTapRef}
                 >
                     <Text>Help</Text>
-                </TapGestureHandler>
+                </TapGestureHandler> */}
             </View>
-        </SafeAreaView>
+     </SafeAreaView>
     )
 }
 
@@ -75,7 +71,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'whitesmoke',
+        backgroundColor: 'red',
         width: 'auto',
         paddingTop:40,
         marginTop: 40,
@@ -128,4 +124,4 @@ const styles = StyleSheet.create({
     
 })
 
-export default EditTask
+export default UpdateTask

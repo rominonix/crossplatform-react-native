@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { SafeAreaView, View, StyleSheet, TextInput, FlatList, Text, TouchableOpacity, Animated, Image, CheckBox } from 'react-native'
 import { TasksContext } from '../store/TasksContext'
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ButtonUpdateTask, ButtonCreateTask } from './TaskButtons'
+// import { ButtonUpdateTask, ButtonCreateTask } from './TaskButtons'
 import { Icon } from 'react-native-elements'
 // import Swipeable from './Swipeable';
 
@@ -21,36 +21,36 @@ const Tasks = props => {
 
     const currentItem = mytasks.find(item => item.id == tasksContext.currentID)
 
-    // const ButtonCreateTask = () => {
-    //     const navigation = useNavigation()
-    //     return (
-    //         <TouchableOpacity
-    //             style={styles.createTaskButton}
-    //             onPress={() =>
-    //                 navigation.navigate('CreateTask')}>
-    //             <Text
-    //                 style={styles.createTaskTitle}>
-    //                 Create task
-    //             </Text>
-    //         </TouchableOpacity>
-    //     )
-    // }
+    const ButtonCreateTask = () => {
+        const navigation = useNavigation()
+        return (
+            <TouchableOpacity
+                style={styles.createTaskButton}
+                onPress={() =>
+                    navigation.navigate('CreateTask')}>
+                <Text
+                    style={styles.createTaskTitle}>
+                    Create task
+                </Text>
+            </TouchableOpacity>
+        )
+    }
 
-    // const ButtonUpdateTask = () => {
-    //     const navigation = useNavigation()
-    //     return (
-    //         <TouchableOpacity
-    //             style={styles.updateTaskButton}
-    //             onPress={() =>
-    //                 navigation.navigate('UpdateTaskScreen')}
-    //         >
-    //             <Text
-    //                 style={styles.createTaskTitle}>
-    //                 Update task
-    //             </Text>
-    //         </TouchableOpacity>
-    //     )
-    // }
+    const ButtonUpdateTask = () => {
+        const navigation = useNavigation()
+        return (
+            <TouchableOpacity
+                style={styles.updateTaskButton}
+                onPress={() =>
+                    navigation.navigate('UpdateTaskScreen')}
+            >
+                <Text
+                    style={styles.createTaskTitle}>
+                    Update task
+                </Text>
+            </TouchableOpacity>
+        )
+    }
 
     const Item = ({ item, onPress }) => {
         return (
@@ -239,10 +239,10 @@ const styles = StyleSheet.create({
 
     list: {
         width: '90%',
-        marginTop: 15,
+        marginTop: 25,
     },
     item: {
-        marginTop: 10,
+        marginTop: 15,
         marginLeft: 20,
         marginRight: 20,
         padding: 15,

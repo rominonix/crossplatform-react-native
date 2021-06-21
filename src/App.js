@@ -22,7 +22,7 @@ export default function App() {
             <TheRestOfTheApp />
         }
       </View>
-    </ TasksContextProvider>
+   </ TasksContextProvider>
   );
 }
 

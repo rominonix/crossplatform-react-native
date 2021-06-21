@@ -7,11 +7,10 @@ const TasksContextProvider = (props) => {
     const [tasks, setTasks] = useState([])
     const [taskName, setTaskName] = useState('')
     const [clientId, setClientId] = useState('')
-    const [currentTask, setCurrentTask] = useState("")
-    const [currentTaskName, setCurrentTaskName] = useState("")
+    const [currentTask, setCurrentTask] = useState('')
+    const [currentTaskName, setCurrentTaskName] = useState('')
     const [taskStatus, setTaskStatus] = useState(null)
-    const [currentID, setCurrentID] = useState(null)
-   
+    const [currentID, setCurrentID] = useState(null)   
 
     const getLatestTasks = async () => {
         const latestTasks = await API.gettasks(tasks)

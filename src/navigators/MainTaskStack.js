@@ -7,7 +7,7 @@ import UpdateTask from '../components/UpdateTask'
 // import UpdateTaskScreen from '../screens/UpdateTaskScreen'
 
 const Stack = createStackNavigator()
-const MainStack = (props) => {
+const MainTaskStack = (props) => {
     return (
 
         <Stack.Navigator>
@@ -51,4 +51,4 @@ const MainStack = (props) => {
         </Stack.Navigator>
     )
 }
-export default MainStack
+export default MainTaskStack

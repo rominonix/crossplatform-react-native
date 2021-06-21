@@ -1,22 +1,22 @@
 import React from 'react'
-
-import Tasks from '../components/Tasks'
-import { ImageBackground, SafeAreaView, Text, StyleSheet } from 'react-native'
-
-
+import TasksList from '../components/TasksList'
+import UpdateTask from '../components/UpdateTask'
+// import Tasks from '../components/Tasks'
+import { ImageBackground, SafeAreaView, Text, StyleSheet, View } from 'react-native'
 import BackgroundImg from '../assets/inside-background.png'
-
-
-
-
+// import { TasksContextProvider } from '../store/TasksContext'
 
 const TasksScreen = props => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ImageBackground source={BackgroundImg} style={styles.image}>
-                {/* < TaskContextProvider> */}
-                    <Tasks />
-                {/* </ TaskContextProvider> */}
+                {/* < TasksContextProvider> */}
+                    <TasksList />
+                    <View>
+
+                    <UpdateTask/>
+                    </View>
+                {/* </ TasksContextProvider> */}
             </ImageBackground>
         </SafeAreaView>
     )
