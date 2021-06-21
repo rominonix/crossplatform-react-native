@@ -4,14 +4,13 @@ import { TasksContext } from '../store/TasksContext'
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Icon } from 'react-native-elements'
+import styles from '../styles/index';
 // import Swipeable from './Swipeable';
-
 
 
 const Tasks = props => {
 
     const tasksContext = useContext(TasksContext)
-    // const loginContext = useContext(LoginContext)
     let mytasks = tasksContext.tasks
     let setCurrentID = tasksContext.setCurrentID
 
@@ -94,35 +93,35 @@ const Tasks = props => {
                 <TouchableOpacity style={styles.closeButton} onPress={hideItem}>
                     <MaterialCommunityIcons name='window-close' size={30} color={'#545454'} />
                 </TouchableOpacity>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 30 }}>
-                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 18 }}>{item.taskName}</Text>
-                    <TouchableOpacity style={{ justifyContent: 'flex-end' }}>
-                        <Image style={{ width: 20, height: 20 }} source={require('../assets/update-icon1.png')}></Image>
+                <View style={styles.gridTaskName}>
+                    <Text style={styles.textTask}>{item.taskName}</Text>
+                    <TouchableOpacity style={styles.iconUpdate}>
+                        <Image style={styles.iconSize} source={require('../assets/update-icon1.png')}></Image>
                     </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: 'row', marginTop: 30 }}>
-                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 18 }}>Client ID: </Text>
+                <View style={styles.gridClientId}>
+                    <Text style={styles.textTask}>Client ID: </Text>
                     <Text style={styles.activeItemHeading} >{item.id}</Text>
                 </View>
-                <View style={{ marginTop: 30, flex: 1, justifyContent: 'flex-start', }}>
-                    <Text style={{ fontSize: 18 }}>Task images:</Text>
-                    <View style={{ width: 50, height: 50, borderWidth: 1, borderStyle: 'dashed', borderRadius: 1, marginTop: 10 }} />
+                <View style={styles.gridTaskImg}>
+                    <Text style={styles.textImg}>Task images:</Text>
+                    <View style={styles.imgBox} />
                 </View>
-                <View style={{ flexDirection: 'row' ,marginTop: '30%'}}>
-                    <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 18 }}>Messages:</Text>
-                    <View style={{ marginTop: 30, marginRight: '30%' }}>
+                <View style={styles.gridMessages}>
+                    <Text style={styles.textTask}>Messages:</Text>
+                    <View style={styles.listMsg}>
                         <Text >Messages 1</Text>
                         <Text >Messages 2</Text>
                         <Text >Messages 3</Text>
-                        <TouchableOpacity style={{ marginTop: 30,  }}>
+                        <TouchableOpacity style={styles.loadMore}>
                             <Text >Load more +</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{ flexDirection: 'row', marginTop: 30 }}>
-                    <Text style={{ fontSize: 18 ,marginRight:45}}>Status:</Text>
-                    <View style={{ flexDirection: 'row',justifyContent: 'space-between', flex: 1 }}>
-                        <View style={{ margin: 0 }}>
+                <View style={styles.gridStatus}>
+                    <Text style={styles.textStatus}>Status:</Text>
+                    <View style={styles.gridCheckbox}>
+                        <View>
                             <CheckBox value={isNew} onValueChange={setNew} style={styles.checkbox} />
                             <Text >New</Text>
                         </View>
@@ -138,7 +137,6 @@ const Tasks = props => {
 
                 </View>
 
-
                 <ButtonUpdateTask />
 
                 {/* <TouchableOpacity style={styles.item}>
@@ -146,11 +144,9 @@ const Tasks = props => {
                 </TouchableOpacity> */}
             </Animated.View>
         )
-
     }
 
     return (
-
 
         <SafeAreaView style={{ flex: 1 }}>
 
@@ -158,7 +154,7 @@ const Tasks = props => {
                 currentItem && <ActiveItem item={currentItem} setCurrentID={setCurrentID} />
             }
 
-            <View style={styles.container}>
+            <View style={styles.containerTask}>
                 <ButtonCreateTask />
                 <View style={styles.inputContainer}>
                     <Icon
@@ -179,130 +175,5 @@ const Tasks = props => {
         </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: 'whitesmoke',
-        width: 'auto',
-        paddingTop: 40,
-        marginTop: 100,
-        marginLeft: 20,
-        marginRight: 20,
-        marginBottom: 30,
-        borderRadius: 20,
-        shadowColor: '#545454',
-        shadowOffset: {
-            width: 5,
-            height: 5,
-        },
-        shadowOpacity: 0.6,
-    },
-    input: {
-        borderWidth: 0.5,
-        width: '65%',
-        height: 30,
-        marginTop: 20,
-        borderRadius: 5,
-        borderColor: '#545454',
-    },
-    inputContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-
-    createTaskButton: {
-        position: 'absolute',
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'flex-end',
-        borderWidth: 1,
-        width: '40%',
-        height: 50,
-        top: -20,
-        right: 30,
-        backgroundColor: '#545454',
-        borderRadius: 8,
-        zIndex: 0
-    },
-
-    updateTaskButton: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        width: '50%',
-        height: 50,
-        margin: 30,
-        backgroundColor: '#545454',
-        borderRadius: 8,
-    },
-
-    createTaskTitle: {
-        color: 'whitesmoke',
-        textTransform: 'uppercase'
-    },
-
-    closeButton: {
-        alignSelf: 'flex-end',
-    },
-
-    list: {
-        width: '90%',
-        marginTop: 15,
-    },
-    item: {
-        marginTop: 10,
-        marginLeft: 20,
-        marginRight: 20,
-        padding: 15,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderStyle: 'dashed',
-        borderColor: '#545454',
-        alignItems: 'center',
-    },
-    itemText: {
-        color: '#545454',
-        fontSize: 18
-    },
-    activeItem: {
-        backgroundColor: 'whitesmoke',
-        position: 'absolute',
-        alignItems: 'center',
-        justifyContent: 'center',
-        // top: 0,
-        // left: 0,
-        // bottom: 0,
-        // right: 0,
-        height: '85%',
-        marginTop: 80,
-        marginLeft: 20,
-        marginRight:20,
-        width: '90%',
-        borderRadius: 20,
-        zIndex: 1,
-        padding: 30,
-        paddingTop: 40,
-    },
-    contentActiveItem: {
-        flex: 1,
-        alignItems: 'baseline',
-        backgroundColor: 'whitesmoke',
-        width: 340,
-        paddingTop: 40,
-        paddingLeft: 30,
-        marginTop: 20,
-        borderRadius: 20,
-        shadowColor: '#545454',
-        shadowOffset: {
-            width: 5,
-            height: 5,
-        },
-        shadowOpacity: 0.6,
-    }
-
-
-})
 
 export default Tasks
