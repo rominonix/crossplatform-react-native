@@ -6,8 +6,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { Icon } from 'react-native-elements'
 import { Swipeable } from 'react-native-gesture-handler'
 import styles from '../styles/index';
-// import Swipeable from './Swipeable';
-
 
 const Tasks = props => {
 
@@ -64,11 +62,13 @@ const Tasks = props => {
 
     const Item = ({ handleDelete, item, onPress }) => {
         const leftSwipe = () => {
-
             return (
                 <TouchableOpacity onPress={handleDelete}>
-                    <View style={{ backgroundColor: 'red', justifyContent: 'center', width: 100, alignItems: 'center', height: 50, marginTop: 10, padding: 0, borderRadius: 10 }}>
-                        <Text>Delete</Text>
+                    <View style={styles.leftSwipe}>
+                        <MaterialCommunityIcons 
+                        name='delete-outline' 
+                        size={30} 
+                        color={'#545454'}/>
                     </View>
                 </TouchableOpacity>
             )
@@ -111,12 +111,17 @@ const Tasks = props => {
         return (
             <Animated.View style={[styles.activeItem, { transform: [{ scale }] }]}>
                 <TouchableOpacity style={styles.closeButton} onPress={hideItem}>
-                    <MaterialCommunityIcons name='window-close' size={30} color={'#545454'} />
+                    <MaterialCommunityIcons 
+                    name='window-close' 
+                    size={30} 
+                    color={'#545454'} />
                 </TouchableOpacity>
                 <View style={styles.gridTaskName}>
                     <Text style={styles.textTask}>{item.taskName}</Text>
                     <TouchableOpacity style={styles.iconUpdate}>
-                        <Image style={styles.iconSize} source={require('../assets/update-icon1.png')}></Image>
+                        <Image style={styles.iconSize} 
+                        source={require('../assets/update-icon1.png')}>   
+                        </Image>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.gridClientId}>
@@ -142,15 +147,24 @@ const Tasks = props => {
                     <Text style={styles.textStatus}>Status:</Text>
                     <View style={styles.gridCheckbox}>
                         <View>
-                            <CheckBox value={isNew} onValueChange={setNew} style={styles.checkbox} />
+                            <CheckBox 
+                            value={isNew} 
+                            onValueChange={setNew} 
+                            style={styles.checkbox} />
                             <Text >New</Text>
                         </View>
                         <View>
-                            <CheckBox value={isInprogress} onValueChange={setInprogress} style={styles.checkbox} />
-                            <Text >In prograss</Text>
+                            <CheckBox 
+                            value={isInprogress} 
+                            onValueChange={setInprogress} 
+                            style={styles.checkbox} />
+                            <Text>In progress</Text>
                         </View>
                         <View>
-                            <CheckBox value={isDone} onValueChange={setDone} style={styles.checkbox} />
+                            <CheckBox 
+                            value={isDone} 
+                            onValueChange={setDone} 
+                            style={styles.checkbox} />
                             <Text >Done</Text>
                         </View>
                     </View>

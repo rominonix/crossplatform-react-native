@@ -1,11 +1,12 @@
 import React,{useEffect,useContext,useState} from 'react'
 import * as ImagePicker from 'expo-image-picker'
-import { Text, TouchableOpacity, ImageBackground, View, Image, StyleSheet} from 'react-native'
+import { Text, TouchableOpacity, ImageBackground, View, Image} from 'react-native'
 import picture from '../assets/portait.png'
 import { ActionSheet, Root } from 'native-base'
 import { LoginContext } from '../store/LoginContext'
 import  AsyncStorage  from '@react-native-async-storage/async-storage';
 import { TextInput } from 'react-native-gesture-handler'
+import styles from '../styles/index'
 
 const ProfileScreen = props => {
    const [image, setImage] = React.useState({ picture })
@@ -86,11 +87,11 @@ const ProfileScreen = props => {
                <TouchableOpacity onPress={addImage}>
                   <Image style={styles.editPictrue} source={require('../assets/camera.png')}></Image>
                </TouchableOpacity>
-               {image && <Image source={{ uri: image.uri }} style={{ width: 200, height: 200, borderRadius: 50, borderWidth: 2 }} />}
+               {image && <Image source={{ uri: image.uri }} style={styles.imgProfile} />}
               
                <View style={styles.emailWrapper}>
                   <Text>E-mail</Text>
-                  <Text style={styles.email}>{user}</Text>
+                  <Text style={styles.emailProfile}>{user}</Text>
                   <TouchableOpacity>
                      <Image style={styles.edit} source={require('../assets/update-icon1.png')}></Image>
                   </TouchableOpacity>
@@ -109,39 +110,4 @@ const ProfileScreen = props => {
 }
 
 
-const styles = StyleSheet.create({
-   bgrImage: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
-   },
-   wrapper: {
-      backgroundColor: '#F5F5F5',
-      padding: 50,
-      borderRadius: 10
-   },
-   editPictrue: {
-      width: 30,
-      height: 30
-   },
-
-   nameWrapper: {
-      flexDirection: 'row',
-      marginTop: 30,
-      justifyContent: 'space-between',
-   },
-   emailWrapper: {
-      flexDirection: 'row',
-      marginTop: 30,
-      justifyContent: 'space-between'
-   },
-   passwordWrapper: {
-      flexDirection: 'row',
-      marginTop: 30,
-      justifyContent: 'space-between'
-   },
-   email:{
-       marginLeft:20
-   }
-})
 export default ProfileScreen

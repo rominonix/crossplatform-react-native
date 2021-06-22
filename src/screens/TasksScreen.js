@@ -1,10 +1,8 @@
 import React from 'react'
-
 import Tasks from '../components/Tasks'
 import { ImageBackground, SafeAreaView, StyleSheet } from 'react-native'
-
-
 import BackgroundImg from '../assets/inside-background.png'
+import styles from '../styles/index'
 
 
 const TasksScreen = props => {
@@ -17,10 +15,4 @@ const TasksScreen = props => {
     )
 }
 
-const styles = StyleSheet.create({
-    image: {
-        width: '100%',
-        height: '100%',
-    }
-})
 export default TasksScreen
