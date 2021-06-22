@@ -5,7 +5,7 @@
 // )
 
 import axios from 'axios'
-axios.defaults.baseURL = 'http://192.168.1.154:3000';
+axios.defaults.baseURL = 'http://192.168.0.14:3000';
 const API = axios.create()
 
 export async function authenticate(email, password) {
@@ -58,12 +58,15 @@ export async function updatetask(taskId,taskName, clientId, taskStatus) {
    }
 }
 
-// export async function deletetask(currentID) {
-//    console.log(currentID);
-//    const response = await API.delete('/tasks/',{params: currentID})
-//    if (response.status == 200) { 
-//       return response.data }
-//    else {
-//       console.error({ msg: "cannot delete task" })
-//    }
-// }
+export async function deletetask(taskId) {
+   console.log("hej")
+   console.log(taskId);
+   const url =`/tasks/ ${taskId}`
+   const response = await API.delete(url)
+
+   if (response.status == 200) { 
+      return response.data }
+   else {
+      console.error({ msg: "cannot delete task" })
+   }
+}

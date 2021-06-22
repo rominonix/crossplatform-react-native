@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Icon } from 'react-native-elements'
 // import Swipeable from './Swipeable';
+import { Swipeable } from 'react-native-gesture-handler'
+
 
 
 
@@ -25,6 +27,16 @@ const Tasks = props => {
 
     const currentItem = mytasks.find(item => item.id == tasksContext.currentID)
 
+
+    const deleteItem = async () => {
+        try {
+           const success = await tasksContext.deleteTask(setCurrentID) 
+        } catch (err) {
+           console.log(err)
+        }
+     }
+
+     
     const ButtonCreateTask = () => {
         const navigation = useNavigation()
         return (
@@ -56,13 +68,26 @@ const Tasks = props => {
         )
     }
 
-    const Item = ({ item, onPress }) => {
-        return (
-            <View>
-                <TouchableOpacity style={styles.item} onPress={onPress}>
-                    <Text style={styles.itemText}>{item.taskName}</Text>
+    const Item = ({ handleDelete,item, onPress }) => {
+        const leftSwipe = () => {
+            
+            return (
+                <TouchableOpacity onPress={handleDelete}>
+                    <View style={{ backgroundColor: 'red', justifyContent: 'center', width: 100, alignItems: 'center', height: 50, marginTop: 10, padding: 0, borderRadius: 10 }}>
+                        <Text>Delete</Text>
+                    </View>
                 </TouchableOpacity>
-            </View>
+            )
+        }
+        return (
+            <Swipeable
+                renderLeftActions={leftSwipe}>
+                <View>
+                    <TouchableOpacity style={styles.item} onPress={onPress}>
+                        <Text style={styles.itemText}>{item.taskName}</Text>
+                    </TouchableOpacity>
+                </View>
+            </Swipeable>
         )
     }
 
@@ -108,20 +133,20 @@ const Tasks = props => {
                     <Text style={{ fontSize: 18 }}>Task images:</Text>
                     <View style={{ width: 50, height: 50, borderWidth: 1, borderStyle: 'dashed', borderRadius: 1, marginTop: 10 }} />
                 </View>
-                <View style={{ flexDirection: 'row' ,marginTop: '30%'}}>
+                <View style={{ flexDirection: 'row', marginTop: '30%' }}>
                     <Text style={{ justifyContent: 'flex-start', flex: 1, fontSize: 18 }}>Messages:</Text>
                     <View style={{ marginTop: 30, marginRight: '30%' }}>
                         <Text >Messages 1</Text>
                         <Text >Messages 2</Text>
                         <Text >Messages 3</Text>
-                        <TouchableOpacity style={{ marginTop: 30,  }}>
+                        <TouchableOpacity style={{ marginTop: 30, }}>
                             <Text >Load more +</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 30 }}>
-                    <Text style={{ fontSize: 18 ,marginRight:45}}>Status:</Text>
-                    <View style={{ flexDirection: 'row',justifyContent: 'space-between', flex: 1 }}>
+                    <Text style={{ fontSize: 18, marginRight: 45 }}>Status:</Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1 }}>
                         <View style={{ margin: 0 }}>
                             <CheckBox value={isNew} onValueChange={setNew} style={styles.checkbox} />
                             <Text >New</Text>
@@ -148,6 +173,7 @@ const Tasks = props => {
         )
 
     }
+   
 
     return (
 
@@ -173,8 +199,12 @@ const Tasks = props => {
                 <FlatList style={styles.list}
                     data={mytasks}
                     keyExtractor={item => String(item.id)}
-                    renderItem={(props) => <Item item={props.item}
-                        onPress={() => setCurrentID(props.item.id)} />} />
+                    renderItem={(props) => <Item 
+                        item={props.item}
+                        onPress={() => setCurrentID(props.item.id)} 
+                        handleDelete={()=>deleteItem(tasksContext.currentID)}
+
+                         />} />
             </View>
         </SafeAreaView>
     )
@@ -278,7 +308,7 @@ const styles = StyleSheet.create({
         height: '85%',
         marginTop: 80,
         marginLeft: 20,
-        marginRight:20,
+        marginRight: 20,
         width: '90%',
         borderRadius: 20,
         zIndex: 1,
