@@ -35,7 +35,6 @@ const TasksContextProvider = (props) => {
 
     const deleteTask = async (currId) => {
         const dltTask = await API.deletetask(currId)
-        // setCurrentID(dltTask.currentID)
     }
 
     return (

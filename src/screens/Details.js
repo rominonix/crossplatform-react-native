@@ -1,5 +1,4 @@
 import React from 'react'
-// import { SafeAreaView, Text } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TasksScreen from './TasksScreen'
 import SettingsScreen from './SettingScreen'

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { SafeAreaView, Text, View, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native'
+import { SafeAreaView, Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { TasksContext } from '../store/TasksContext'
 
 
@@ -8,7 +8,6 @@ const NewTask = props => {
        console.log(addNewTask.currentID)
        const newTaskHandler = async () => {
           const success = await addNewTask.createNewTask() 
-          //alert o algo para que el cliente sepa que agrego un nuevo task
        }
 
     return (

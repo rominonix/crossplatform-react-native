@@ -1,5 +1,4 @@
 import React from 'react'
-import { TasksContextProvider } from '../store/TasksContext'
 import { SafeAreaView, Text, ImageBackground, StyleSheet } from 'react-native'
 import EditTask from '../components/EditTask'
 
@@ -9,9 +8,9 @@ const UpdateTaskScreen = props => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#CFDEEC' }}>
             <ImageBackground source={BackgroundImg} style={styles.image}>
-                {/* < TasksContextProvider> */}
+            
                 <EditTask />
-                {/* </ TasksContextProvider> */}
+               
             </ImageBackground>
         </SafeAreaView>
     )

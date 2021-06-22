@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Text, Button, View, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native'
-
+import React, { useContext, useEffect } from 'react'
+import { Text, View, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native'
 import { LoginContext } from '../store/LoginContext'
 import  AsyncStorage  from '@react-native-async-storage/async-storage';
 
@@ -60,7 +59,6 @@ const Login = props => {
                <TouchableOpacity style={styles.buttonContainer} onPress={loginHandler} onHover={{ backgroundColor: 'blue' }}>
                   <Text style={{ color: '#F5F5F5', margin: 5 }}>SIGN IN</Text>
                </TouchableOpacity>
-               {/* <Text style={styles.title}>INGE BRA BYGG</Text> */}
             </View>
          </View>
       </ImageBackground>

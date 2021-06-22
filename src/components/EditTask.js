@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { SafeAreaView, View, StyleSheet, TextInput, Text, TouchableOpacity} from 'react-native'
-// import { Button } from 'react-native-elements'
+import { SafeAreaView, View, StyleSheet, TextInput, Text, TouchableOpacity } from 'react-native'
 import { TasksContext } from '../store/TasksContext'
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
@@ -11,15 +10,11 @@ const EditTask = props => {
             alert('Add the task name and the client ID to your task');
         }
     };
-    
-    
-    
-    
-    
+
     const tasksContext = useContext(TasksContext)
     const update = async () => {
         tasksContext.updateTask()
-        
+
     }
     let currentID = tasksContext.currentID
 
@@ -55,14 +50,13 @@ const EditTask = props => {
                     value={tasksContext.taskStatus}>
                 </TextInput>
                 <TouchableOpacity style={styles.confirmButton}
-                    
+
                     onPress={update}
                 >
                     <Text style={styles.confirmTitle}>Confirm</Text>
                 </TouchableOpacity>
                 <TapGestureHandler
                     onHandlerStateChange={onSingleTapEvent}
-                    // waitFor={doubleTapRef}
                 >
                     <Text>Help</Text>
                 </TapGestureHandler>
@@ -77,7 +71,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'whitesmoke',
         width: 'auto',
-        paddingTop:40,
+        paddingTop: 40,
         marginTop: 40,
         marginLeft: 20,
         marginRight: 20,
@@ -94,7 +88,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         width: '65%',
         height: 30,
-        marginTop:10,
+        marginTop: 10,
         marginBottom: 30,
         borderRadius: 5,
         borderColor: '#545454',
@@ -118,14 +112,14 @@ const styles = StyleSheet.create({
     itemText: {
         color: '#747474',
         fontSize: 18,
-        marginBottom:30,
+        marginBottom: 30,
     },
 
     label: {
         color: '#545454',
-        fontSize:18,
+        fontSize: 18,
     }
-    
+
 })
 
 export default EditTask

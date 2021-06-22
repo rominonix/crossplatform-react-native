@@ -4,7 +4,6 @@ import HomeScreen from '../screens/HomeScreen'
 import Details from '../screens/Details'
 import ProfileScreen from '../screens/ProfileScreen'
 import TasksScreen from '../screens/TasksScreen'
-// import CreateTask from '../components/CreateTask'
 import CreateTask from '../screens/CreateTask'
 import UpdateTaskScreen from '../screens/UpdateTaskScreen'
 

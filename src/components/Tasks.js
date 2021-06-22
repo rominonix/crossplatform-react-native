@@ -4,16 +4,11 @@ import { TasksContext } from '../store/TasksContext'
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Icon } from 'react-native-elements'
-// import Swipeable from './Swipeable';
 import { Swipeable } from 'react-native-gesture-handler'
-
-
-
 
 const Tasks = props => {
 
     const tasksContext = useContext(TasksContext)
-    // const loginContext = useContext(LoginContext)
     let mytasks = tasksContext.tasks
     let setCurrentID = tasksContext.setCurrentID
 
@@ -21,26 +16,18 @@ const Tasks = props => {
         tasksContext.getLatestTasks()
     }, [])
 
-    // const deleteAtask = async () =>  {
-    //     const deleteSuccess = await tasksContext.deleteTask(currentID)  
-    // }
-
     const currentItem = mytasks.find(item => item.id == tasksContext.currentID)
 
-
     const deleteItem = async (id) => {
-        console.log("DeleteItem")
-        console.log(id)
-        // console.log(tasksContext.currentID)
 
         try {
-           const success = await tasksContext.deleteTask(id) 
+            const success = await tasksContext.deleteTask(id)
         } catch (err) {
-           console.log(err)
+            console.log(err)
         }
-     }
+    }
 
-     
+
     const ButtonCreateTask = () => {
         const navigation = useNavigation()
         return (
@@ -72,9 +59,9 @@ const Tasks = props => {
         )
     }
 
-    const Item = ({ handleDelete,item, onPress }) => {
+    const Item = ({ handleDelete, item, onPress }) => {
         const leftSwipe = () => {
-            
+
             return (
                 <TouchableOpacity onPress={handleDelete}>
                     <View style={{ backgroundColor: 'red', justifyContent: 'center', width: 100, alignItems: 'center', height: 50, marginTop: 10, padding: 0, borderRadius: 10 }}>
@@ -98,7 +85,7 @@ const Tasks = props => {
     const ActiveItem = ({ setCurrentID, item }) => {
         const scale = new Animated.Value(0)
         const [isNew, setNew] = useState(false);
-        const [isInprograss, setInprograss] = useState(false)
+        const [isInprogress, setInprogress] = useState(false)
         const [isDone, setDone] = useState(false)
         useEffect(() => {
             Animated.timing(scale, {
@@ -156,7 +143,7 @@ const Tasks = props => {
                             <Text >New</Text>
                         </View>
                         <View>
-                            <CheckBox value={isInprograss} onValueChange={setInprograss} style={styles.checkbox} />
+                            <CheckBox value={isInprogress} onValueChange={setInprogress} style={styles.checkbox} />
                             <Text >In prograss</Text>
                         </View>
                         <View>
@@ -167,20 +154,15 @@ const Tasks = props => {
 
                 </View>
 
-
                 <ButtonUpdateTask />
 
-                {/* <TouchableOpacity style={styles.item}>
-                    <Text style={styles.itemText} onPress={deleteAtask}>DELETE</Text>
-                </TouchableOpacity> */}
             </Animated.View>
         )
 
     }
-   
+
 
     return (
-
 
         <SafeAreaView style={{ flex: 1 }}>
 
@@ -203,12 +185,12 @@ const Tasks = props => {
                 <FlatList style={styles.list}
                     data={mytasks}
                     keyExtractor={item => String(item.id)}
-                    renderItem={(props) => <Item 
+                    renderItem={(props) => <Item
                         item={props.item}
-                        onPress={() => setCurrentID(props.item.id)} 
-                        handleDelete={()=>deleteItem(props.item.id)}
+                        onPress={() => setCurrentID(props.item.id)}
+                        handleDelete={() => deleteItem(props.item.id)}
 
-                         />} />
+                    />} />
             </View>
         </SafeAreaView>
     )

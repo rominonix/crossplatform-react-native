@@ -59,8 +59,6 @@ export async function updatetask(taskId,taskName, clientId, taskStatus) {
 }
 
 export async function deletetask(taskId) {
-   console.log("hej")
-   console.log(taskId);
    const url =`/tasks/ ${taskId}`
    const response = await API.delete(url)
 
