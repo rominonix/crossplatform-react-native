@@ -33,9 +33,8 @@ const TasksContextProvider = (props) => {
         const updTask = await API.updatetask(currentID, taskName, clientId, taskStatus)
     }
 
-    const deleteTask = async () => {
-        console.log(currentID);
-        const dltTask = await API.deletetask(currentID)
+    const deleteTask = async (currId) => {
+        const dltTask = await API.deletetask(currId)
         // setCurrentID(dltTask.currentID)
     }
 

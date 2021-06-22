@@ -28,9 +28,13 @@ const Tasks = props => {
     const currentItem = mytasks.find(item => item.id == tasksContext.currentID)
 
 
-    const deleteItem = async () => {
+    const deleteItem = async (id) => {
+        console.log("DeleteItem")
+        console.log(id)
+        // console.log(tasksContext.currentID)
+
         try {
-           const success = await tasksContext.deleteTask(setCurrentID) 
+           const success = await tasksContext.deleteTask(id) 
         } catch (err) {
            console.log(err)
         }
@@ -202,7 +206,7 @@ const Tasks = props => {
                     renderItem={(props) => <Item 
                         item={props.item}
                         onPress={() => setCurrentID(props.item.id)} 
-                        handleDelete={()=>deleteItem(tasksContext.currentID)}
+                        handleDelete={()=>deleteItem(props.item.id)}
 
                          />} />
             </View>

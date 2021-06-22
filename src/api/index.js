@@ -5,7 +5,7 @@
 // )
 
 import axios from 'axios'
-axios.defaults.baseURL = 'http://192.168.0.14:3000';
+axios.defaults.baseURL = 'http://192.168.43.106:3000';
 const API = axios.create()
 
 export async function authenticate(email, password) {
