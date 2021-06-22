@@ -58,7 +58,6 @@ const Login = props => {
                >
                </TextInput>
                <TouchableOpacity style={styles.buttonContainerLogin} onPress={loginHandler} onHover={{ backgroundColor: 'blue' }}>
-                  {/* <Text style={{ color: '#F5F5F5', margin: 5 }}>SIGN IN</Text> */}
                   <Text style={styles.titleLogin}>SIGN IN</Text>
                </TouchableOpacity>
             </View>
